@@ -35,6 +35,9 @@ const Toolbar: FunctionComponent = () => {
 export default Toolbar;
 
 const ToolbarWrapper = styled.div`
+    position: absolute;
+    z-index: 10;
+    top: 80px;
     width: 60px;
     display: flex;
     flex-direction: column;
