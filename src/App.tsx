@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import Toolbar from './toolbar/Toolbar';
 
 function App() {
-    return <Header>2D CAD</Header>;
+    return (
+        <>
+            <Header>2D CAD</Header>
+            <Toolbar />
+        </>
+    );
 }
 
 export default App;
