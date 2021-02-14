@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Canvas from './canvas/Canvas';
 import Toolbar from './toolbar/Toolbar';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
         <>
             <Header>2D CAD</Header>
             <Toolbar />
+            <Canvas />
         </>
     );
 }
