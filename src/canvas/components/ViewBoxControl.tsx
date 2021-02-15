@@ -15,12 +15,25 @@ interface ViewBoxControlProps {
 }
 
 const moveStep = 10;
+const zoomFactor = 0.2;
 
 const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
     const moveUp = () => props.onChange((vb) => ({ ...vb, y: vb.y - moveStep }));
     const moveDown = () => props.onChange((vb) => ({ ...vb, y: vb.y + moveStep }));
     const moveLeft = () => props.onChange((vb) => ({ ...vb, x: vb.x - moveStep }));
     const moveRight = () => props.onChange((vb) => ({ ...vb, x: vb.x + moveStep }));
+    const zoomIn = () =>
+        props.onChange((vb) => ({
+            ...vb,
+            width: vb.width / (1 + zoomFactor),
+            height: vb.height / (1 + zoomFactor),
+        }));
+    const zoomOut = () =>
+        props.onChange((vb) => ({
+            ...vb,
+            width: vb.width * (1 + zoomFactor),
+            height: vb.height * (1 + zoomFactor),
+        }));
 
     return (
         <Wrapper>
@@ -38,9 +51,9 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
                 <span />
             </Move>
             <Zoom>
-                <Control>+</Control>
-                <Control>100%</Control>
-                <Control>-</Control>
+                <Control onClick={zoomIn}>+</Control>
+                <span>Zoom</span>
+                <Control onClick={zoomOut}>-</Control>
             </Zoom>
         </Wrapper>
     );

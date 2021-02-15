@@ -15,6 +15,10 @@ const Canvas: FunctionComponent<CanvasProps> = (props) => {
             <svg
                 viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
                 xmlns="http://www.w3.org/2000/svg"
+                style={{
+                    height: '100vh',
+                    width: '100vw',
+                }}
             >
                 <rect
                     width="100"
