@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Canvas from './canvas-svg-js/Canvas';
+import Canvas from './canvas/Canvas';
 import Toolbar from './toolbar/Toolbar';
 
 function App() {
