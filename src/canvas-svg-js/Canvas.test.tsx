@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Canvas from './Canvas';
 
 test('svg is created in correct DOM tree', () => {

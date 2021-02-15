@@ -1,3 +1,9 @@
+/** EXPERIMENTAL
+ *
+ * I think I won't use svg.js at all, as direct DOM manipulation (not via React)
+ * leads probably to an application which is not easy to scale.
+ */
+
 import React, { FunctionComponent, useEffect } from 'react';
 import { SVG } from '@svgdotjs/svg.js';
 
