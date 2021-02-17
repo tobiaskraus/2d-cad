@@ -11,12 +11,7 @@ const Grid: FunctionComponent<GridProps> = (props) => {
         <>
             <defs>
                 <pattern id="smallGrid" width="1" height="1" patternUnits="userSpaceOnUse">
-                    <path
-                        d="M 1 0 L 0 0 0 1"
-                        fill="none"
-                        stroke="gray"
-                        stroke-width={strokeWidth}
-                    />
+                    <path d="M 1 0 L 0 0 0 1" fill="none" stroke="gray" strokeWidth={strokeWidth} />
                 </pattern>
                 <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
                     <rect width="10" height="10" fill="url(#smallGrid)" />
@@ -24,7 +19,7 @@ const Grid: FunctionComponent<GridProps> = (props) => {
                         d="M 10 0 L 0 0 0 10"
                         fill="none"
                         stroke="gray"
-                        stroke-width={strokeWidth * 2}
+                        strokeWidth={strokeWidth * 2}
                     />
                 </pattern>
             </defs>
