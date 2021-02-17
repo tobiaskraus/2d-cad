@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { getGridGapSize } from './getGridGapSize';
 import { ViewBox } from '../ViewBoxControl';
+import LineLabels from './LineLabels';
 
 interface GridProps {
     viewBox: ViewBox;
@@ -47,6 +48,7 @@ const Grid: FunctionComponent<GridProps> = (props) => {
                 height={props.viewBox.height}
                 fill="url(#grid)"
             />
+            <LineLabels viewBox={props.viewBox} gridGapSize={gridGapSize} />
         </>
     );
 };

@@ -64,8 +64,8 @@ export default ViewBoxControl;
 const Wrapper = styled.div`
     position: absolute;
     z-index: 10;
-    right: 10px;
-    bottom: 10px;
+    right: 3vw;
+    bottom: 3vh;
     width: 120px;
 `;
 
