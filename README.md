@@ -4,6 +4,22 @@ Online 2D CAD Tool for precise drawings.
 
 **WORK IN PROGRESS**
 
+## Features
+
+-   [x] Fullsceen svg (our canvas) where user can **zoom** and **move around** (basic buttons for navigation)
+-   [x] **Grid** grid in the background, which gets smaller gaps when zooming in (and vise versa)
+-   [x] **Grid Labels** which show x & y values of the bigger grid lines. Positioned always at the right / bottom edge of the browser view.
+-   User can **create shapes**
+    -   [ ] Rectangle
+    -   [ ] Line
+    -   [ ] Circle
+    -   [ ] Polygon
+    -   [ ] Text
+-   [ ] Show edge length of shapes
+-   [ ] Show area of shapes
+-   [ ] History / Redo feature
+-   [ ] User can upload **background images**
+
 ## Motivation
 
 (2021-02-14)
