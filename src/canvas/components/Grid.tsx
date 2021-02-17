@@ -7,16 +7,32 @@ interface GridProps {
 
 const Grid: FunctionComponent<GridProps> = (props) => {
     const strokeWidth = ((props.viewBox.width + props.viewBox.height) / 2) * 0.001;
+    const gridGapSize = useMemo(() => getGridGapSize(props.viewBox.width), [props.viewBox]);
     return (
         <>
             <defs>
-                <pattern id="smallGrid" width="1" height="1" patternUnits="userSpaceOnUse">
-                    <path d="M 1 0 L 0 0 0 1" fill="none" stroke="gray" strokeWidth={strokeWidth} />
-                </pattern>
-                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                    <rect width="10" height="10" fill="url(#smallGrid)" />
+                <pattern
+                    id="smallGrid"
+                    width={gridGapSize * 0.1}
+                    height={gridGapSize * 0.1}
+                    patternUnits="userSpaceOnUse"
+                >
                     <path
-                        d="M 10 0 L 0 0 0 10"
+                        d={`M ${gridGapSize * 0.1} 0 L 0 0 0 ${gridGapSize * 0.1}`}
+                        fill="none"
+                        stroke="gray"
+                        strokeWidth={strokeWidth}
+                    />
+                </pattern>
+                <pattern
+                    id="grid"
+                    width={gridGapSize}
+                    height={gridGapSize}
+                    patternUnits="userSpaceOnUse"
+                >
+                    <rect width={gridGapSize} height={gridGapSize} fill="url(#smallGrid)" />
+                    <path
+                        d={`M ${gridGapSize} 0 L 0 0 0 ${gridGapSize}`}
                         fill="none"
                         stroke="gray"
                         strokeWidth={strokeWidth * 2}
@@ -36,8 +52,22 @@ const Grid: FunctionComponent<GridProps> = (props) => {
 
 export default Grid;
 
-const LineLabels: FunctionComponent<GridProps> = (props) => {
-    const [cols, setCols] = useState([]);
+export function getGridGapSize(width: number): number {
+    let gapSize = 1;
+    let scaledWidth = width;
+    if (width > 20) {
+        while (scaledWidth > 20) {
+            gapSize *= 10;
+            scaledWidth = scaledWidth / 10;
+        }
+    } else {
+        while (scaledWidth < 2) {
+            gapSize /= 10;
+            scaledWidth = scaledWidth * 10;
+        }
+    }
+    return gapSize;
+}
 
     useCallback(() => {
         const tempCols = [];
