@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import Grid from './components/Grid';
+import Grid from './components/grid/Grid';
 import ViewBoxControl, { ViewBox } from './components/ViewBoxControl';
 
 interface CanvasProps {

@@ -1,4 +1,4 @@
-import { getGridGapSize } from './Grid';
+import { getGridGapSize } from './getGridGapSize';
 
 interface GridSizeLookkup {
     viewWidth: number;
