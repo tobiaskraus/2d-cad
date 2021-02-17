@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { ViewBox } from './ViewBoxControl';
 
 interface GridProps {
@@ -35,3 +35,13 @@ const Grid: FunctionComponent<GridProps> = (props) => {
 };
 
 export default Grid;
+
+const LineLabels: FunctionComponent<GridProps> = (props) => {
+    const [cols, setCols] = useState([]);
+
+    useCallback(() => {
+        const tempCols = [];
+    }, []);
+
+    return <text>Bla</text>;
+};
