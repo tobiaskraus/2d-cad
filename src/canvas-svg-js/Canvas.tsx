@@ -13,6 +13,7 @@ interface CanvasProps {
 
 const draw = SVG().addTo('body').size('100vw', '100vh').id('canvas');
 
+/** @deprecated */
 const Canvas: FunctionComponent<CanvasProps> = (props) => {
     draw.rect(200, 300).move(50, 25).fill('#f06');
 

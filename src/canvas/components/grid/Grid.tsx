@@ -1,5 +1,6 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
-import { getGridGapSize } from './getGridGapSize';
+import React, { FunctionComponent, useMemo } from 'react';
+
+import { getGridGapSizes } from './getGridGapSizes';
 import { ViewBox } from '../viewBoxControl/ViewBox';
 import LineLabels from './LineLabels';
 
@@ -9,18 +10,18 @@ interface GridProps {
 
 const Grid: FunctionComponent<GridProps> = (props) => {
     const strokeWidth = ((props.viewBox.width + props.viewBox.height) / 2) * 0.001;
-    const gridGapSize = useMemo(() => getGridGapSize(props.viewBox.width), [props.viewBox]);
+    const gridGapSizes = useMemo(() => getGridGapSizes(props.viewBox.width), [props.viewBox]);
     return (
         <>
             <defs>
                 <pattern
                     id="smallGrid"
-                    width={gridGapSize * 0.1}
-                    height={gridGapSize * 0.1}
+                    width={gridGapSizes.small}
+                    height={gridGapSizes.small}
                     patternUnits="userSpaceOnUse"
                 >
                     <path
-                        d={`M ${gridGapSize * 0.1} 0 L 0 0 0 ${gridGapSize * 0.1}`}
+                        d={`M ${gridGapSizes.small} 0 L 0 0 0 ${gridGapSizes.small}`}
                         fill="none"
                         stroke="gray"
                         strokeWidth={strokeWidth}
@@ -28,13 +29,17 @@ const Grid: FunctionComponent<GridProps> = (props) => {
                 </pattern>
                 <pattern
                     id="grid"
-                    width={gridGapSize}
-                    height={gridGapSize}
+                    width={gridGapSizes.big}
+                    height={gridGapSizes.big}
                     patternUnits="userSpaceOnUse"
                 >
-                    <rect width={gridGapSize} height={gridGapSize} fill="url(#smallGrid)" />
+                    <rect
+                        width={gridGapSizes.big}
+                        height={gridGapSizes.big}
+                        fill="url(#smallGrid)"
+                    />
                     <path
-                        d={`M ${gridGapSize} 0 L 0 0 0 ${gridGapSize}`}
+                        d={`M ${gridGapSizes.big} 0 L 0 0 0 ${gridGapSizes.big}`}
                         fill="none"
                         stroke="gray"
                         strokeWidth={strokeWidth * 2}
@@ -48,7 +53,7 @@ const Grid: FunctionComponent<GridProps> = (props) => {
                 height={props.viewBox.height}
                 fill="url(#grid)"
             />
-            <LineLabels viewBox={props.viewBox} gridGapSize={gridGapSize} />
+            <LineLabels viewBox={props.viewBox} gridGapSizes={gridGapSizes} />
         </>
     );
 };
