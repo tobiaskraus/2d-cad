@@ -1,12 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-export interface ViewBox {
-    x: number;
-    y: number;
-    height: number;
-    width: number;
-}
+import { zoomIn, zoomOut } from './zoom';
+import { ViewBox } from './ViewBox';
 
 interface ViewBoxControlProps {
     className?: string;
@@ -15,25 +11,14 @@ interface ViewBoxControlProps {
 }
 
 const moveStep = 10;
-const zoomFactor = 0.2;
 
 const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
     const moveUp = () => props.onChange((vb) => ({ ...vb, y: vb.y - moveStep }));
     const moveDown = () => props.onChange((vb) => ({ ...vb, y: vb.y + moveStep }));
     const moveLeft = () => props.onChange((vb) => ({ ...vb, x: vb.x - moveStep }));
     const moveRight = () => props.onChange((vb) => ({ ...vb, x: vb.x + moveStep }));
-    const zoomIn = () =>
-        props.onChange((vb) => ({
-            ...vb,
-            width: vb.width / (1 + zoomFactor),
-            height: vb.height / (1 + zoomFactor),
-        }));
-    const zoomOut = () =>
-        props.onChange((vb) => ({
-            ...vb,
-            width: vb.width * (1 + zoomFactor),
-            height: vb.height * (1 + zoomFactor),
-        }));
+    const onZoomIn = () => props.onChange((vb) => zoomIn(vb));
+    const onZoomOut = () => props.onChange((vb) => zoomOut(vb));
 
     return (
         <Wrapper>
@@ -51,9 +36,9 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
                 <span />
             </Move>
             <Zoom>
-                <Control onClick={zoomIn}>+</Control>
+                <Control onClick={onZoomIn}>+</Control>
                 <span>Zoom</span>
-                <Control onClick={zoomOut}>-</Control>
+                <Control onClick={onZoomOut}>-</Control>
             </Zoom>
         </Wrapper>
     );

@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import Grid from './components/grid/Grid';
-import ViewBoxControl, { ViewBox } from './components/ViewBoxControl';
+import ViewBoxControl from './components/viewBoxControl/ViewBoxControl';
+import { ViewBox } from './components/viewBoxControl/ViewBox';
 
 const Canvas: FunctionComponent = () => {
     const [viewBox, setViewBox] = useState<ViewBox>({ x: 0, y: 0, width: 80, height: 60 });
