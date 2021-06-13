@@ -42,10 +42,17 @@ fdescribe('zoom', () => {
     it('zoomIn: center should be pivot', () => {
         const vb2 = zoomIn(vb);
 
-        const centerX = (vb: ViewBox) => vb.x + vb.width * 0.5;
-        const centerY = (vb: ViewBox) => vb.y + vb.height * 0.5;
+        expect(getCenterX(vb2)).toEqual(getCenterX(vb));
+        expect(getCenterY(vb2)).toEqual(getCenterY(vb));
+    });
 
-        expect(centerX(vb2)).toEqual(centerX(vb));
-        expect(centerY(vb2)).toEqual(centerY(vb));
+    it('zoomOut: center should be pivot', () => {
+        const vb2 = zoomOut(vb);
+
+        expect(getCenterX(vb2)).toEqual(getCenterX(vb));
+        expect(getCenterY(vb2)).toEqual(getCenterY(vb));
     });
 });
+
+const getCenterX = (vb: ViewBox) => vb.x + vb.width * 0.5;
+const getCenterY = (vb: ViewBox) => vb.y + vb.height * 0.5;
