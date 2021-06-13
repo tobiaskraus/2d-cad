@@ -11,6 +11,7 @@ export function zoomIn(vb: ViewBox): ViewBox {
         y: vb.y + (vb.height - height) * 0.5,
         width,
         height,
+        pixelsPerUnit: vb.pixelsPerUnit / zoomFactor,
     };
 }
 
@@ -22,5 +23,6 @@ export function zoomOut(vb: ViewBox) {
         y: vb.y + (vb.height - height) * 0.5,
         width: vb.width * zoomFactor,
         height: vb.height * zoomFactor,
+        pixelsPerUnit: vb.pixelsPerUnit * zoomFactor,
     };
 }

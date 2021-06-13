@@ -1,12 +1,13 @@
 import { zoomIn, zoomOut } from './zoom';
 import { ViewBox } from './ViewBox';
 
-fdescribe('zoom', () => {
+describe('zoom', () => {
     const vb: ViewBox = {
         x: 0,
         y: 0,
         width: 10,
         height: 6,
+        pixelsPerUnit: 1,
     };
 
     it('zoomIn: width & height reduces', () => {
