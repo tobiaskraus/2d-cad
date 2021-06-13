@@ -1,26 +1,10 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import Grid from './components/grid/Grid';
 import ViewBoxControl from './components/viewBoxControl/ViewBoxControl';
-import { defaultViewBox, getViewBox, ViewBox } from './components/viewBoxControl/ViewBox';
+import { useViewBox } from './components/useViewBox';
 
 const Canvas: FunctionComponent = () => {
-    const [viewBox, setViewBox] = useState<ViewBox>(defaultViewBox);
-
-    // on resize
-    useEffect(() => {
-        function onResize() {
-            const newViewBox = getViewBox({
-                centerX: viewBox.x + viewBox.width * 0.5,
-                centerY: viewBox.y + viewBox.height * 0.5,
-                pixelsPerUnit: viewBox.pixelsPerUnit,
-            });
-            setViewBox(newViewBox);
-        }
-        window.addEventListener('resize', onResize);
-        return () => {
-            window.removeEventListener('resize', onResize);
-        };
-    }, []);
+    const [viewBox, setViewBox] = useViewBox();
 
     return (
         <div>
