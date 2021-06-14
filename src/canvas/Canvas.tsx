@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Grid from './components/grid/Grid';
-import ViewBoxControl from './components/viewBoxControl/ViewBoxControl';
+import ViewBoxControl from './components/viewBox/ViewBoxControl';
 import { useViewBox } from './components/useViewBox';
 
 const Canvas: FunctionComponent = () => {

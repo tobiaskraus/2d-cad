@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 
 import { getGridGapSizes } from './getGridGapSizes';
-import { ViewBox } from '../viewBoxControl/ViewBox';
+import { ViewBox } from '../viewBox/ViewBox';
 import LineLabels from './LineLabels';
 
 interface GridProps {
