@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import Grid from './components/grid/Grid';
-import ViewBoxControl from './components/viewBox/ViewBoxControl';
-import { useViewBox } from './components/useViewBox';
+import Grid from './grid/Grid';
+import ViewBoxControl from './viewBox/ViewBoxControl';
+import { useViewBox } from './viewBox/useViewBox';
 
 const Canvas: FunctionComponent = () => {
     const [viewBox, setViewBox] = useViewBox();

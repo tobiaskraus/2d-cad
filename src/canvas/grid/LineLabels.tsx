@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { findNumberSequenceInRange } from '../../../utils/findNumberSequenceInRange';
+import { findNumberSequenceInRange } from '../../utils/findNumberSequenceInRange';
 import { ViewBox } from '../viewBox/ViewBox';
 
 interface LineLabelsProps {

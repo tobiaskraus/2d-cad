@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { defaultViewBox, getViewBox, ViewBox } from './viewBox/ViewBox';
+import { defaultViewBox, getViewBox, ViewBox } from './ViewBox';
 
 /** returns state & dispatcher of viewBox and handles window resizing */
 export function useViewBox(): [ViewBox, React.Dispatch<React.SetStateAction<ViewBox>>] {
