@@ -20,7 +20,7 @@ const LineLabels: FunctionComponent<LineLabelsProps> = (props) => {
         const tempYVals = findNumberSequenceInRange(yMin, yMax, props.gridGapSizes.big);
         setXVals(tempXVals);
         setYVals(tempYVals);
-    }, [props.viewBox]);
+    }, [props.viewBox, props.gridGapSizes]);
 
     return (
         <g>

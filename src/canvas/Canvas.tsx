@@ -2,6 +2,8 @@ import React, { FunctionComponent } from 'react';
 import Grid from './grid/Grid';
 import ViewBoxControl from './viewBox/ViewBoxControl';
 import { useViewBox } from './viewBox/useViewBox';
+import ShapeLayers from './shapeLayers/ShapeLayers';
+import { shapesStore } from '../store/shapes.store';
 
 const Canvas: FunctionComponent = () => {
     const [viewBox, setViewBox] = useViewBox();
@@ -21,6 +23,7 @@ const Canvas: FunctionComponent = () => {
                 }}
             >
                 <Grid viewBox={viewBox} />
+                <ShapeLayers shapes={shapesStore} />
                 <rect
                     x="10"
                     y="20"
