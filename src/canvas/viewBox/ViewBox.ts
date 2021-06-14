@@ -8,10 +8,10 @@ export interface ViewBox {
 }
 
 export const defaultViewBox: ViewBox = {
-    x: 0,
-    y: 0,
-    width: 80,
-    height: 60,
+    x: 30,
+    y: 40,
+    width: 0,
+    height: 0,
     pixelsPerUnit: 10,
 };
 
