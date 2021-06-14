@@ -22,6 +22,6 @@ function zoom(vb: ViewBox, reverseZoomFactor: number) {
         y: vb.y + (vb.height - height) * 0.5,
         width: vb.width * reverseZoomFactor,
         height: vb.height * reverseZoomFactor,
-        pixelsPerUnit: vb.pixelsPerUnit * reverseZoomFactor,
+        pixelsPerUnit: (vb.pixelsPerUnit * 1) / reverseZoomFactor,
     };
 }

@@ -9,12 +9,13 @@ export function useViewBox(): [ViewBox, React.Dispatch<React.SetStateAction<View
     // on resize
     useEffect(() => {
         function onResize() {
-            const newViewBox = getViewBox({
-                centerX: viewBox.x + viewBox.width * 0.5,
-                centerY: viewBox.y + viewBox.height * 0.5,
-                pixelsPerUnit: viewBox.pixelsPerUnit,
-            });
-            setViewBox(newViewBox);
+            setViewBox((vb) =>
+                getViewBox({
+                    centerX: vb.x + vb.width * 0.5,
+                    centerY: vb.y + vb.height * 0.5,
+                    pixelsPerUnit: vb.pixelsPerUnit,
+                })
+            );
         }
         window.addEventListener('resize', onResize);
 
