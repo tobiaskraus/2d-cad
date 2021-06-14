@@ -15,6 +15,17 @@ export const shapesStore: ShapeObject[] = [
         } as Rect,
     },
     {
+        id: 11,
+        x: 0,
+        y: 50,
+        fill: 'purple',
+        shape: {
+            type: ShapeType.LINE,
+            x2: 60,
+            y2: 70,
+        },
+    },
+    {
         id: 21,
         x: 10,
         y: 20,

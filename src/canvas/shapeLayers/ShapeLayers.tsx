@@ -1,5 +1,9 @@
 import React, { FunctionComponent } from 'react';
+import { Line } from '../../shapes/Line';
+
+import LineShape from '../../shapes/LineShape';
 import { Rect } from '../../shapes/Rect';
+import RectShape from '../../shapes/RectShape';
 import { ShapeObject } from '../../shapes/ShapeObject';
 import { ShapeType } from '../../shapes/ShapeType';
 
@@ -12,6 +16,8 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
         switch (obj.shape.type) {
             case ShapeType.RECT:
                 return <RectShape key={obj.id} {...(obj as ShapeObject<Rect>)} />;
+            case ShapeType.LINE:
+                return <LineShape key={obj.id} {...(obj as ShapeObject<Line>)} />;
         }
     };
 
@@ -19,13 +25,3 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
 };
 
 export default ShapeLayers;
-
-const RectShape: FunctionComponent<ShapeObject<Rect>> = (props) => (
-    <rect
-        x={props.x}
-        y={props.y}
-        width={props.shape.width}
-        height={props.shape.height}
-        style={{ fill: props.fill, strokeWidth: 0.2, stroke: 'rgb(0,0,0)' }}
-    />
-);
