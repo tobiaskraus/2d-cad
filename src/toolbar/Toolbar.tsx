@@ -1,6 +1,9 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
+import { useAppDispatch } from '../hooks';
+import { create as createShape } from '../features/shapes/shapesSlice';
 import Icon from './components/Icon';
+import { ShapeType } from '../shapes/ShapeType';
 
 enum Tool {
     LINE,
@@ -10,8 +13,14 @@ enum Tool {
 const Toolbar: FunctionComponent = () => {
     const [activeTool, setActiveTool] = useState(Tool.LINE);
 
+    const dispatch = useAppDispatch();
+
     const onIconClick = (tool: Tool) => {
         setActiveTool(tool);
+        switch (tool) {
+            case Tool.RECT:
+                dispatch(createShape(ShapeType.RECT));
+        }
     };
 
     return (
