@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { useAppSelector } from '../../hooks';
 import { Line } from '../../shapes/Line';
 
 import LineShape from '../../shapes/LineShape';
@@ -7,11 +8,9 @@ import RectShape from '../../shapes/RectShape';
 import { ShapeObject } from '../../shapes/ShapeObject';
 import { ShapeType } from '../../shapes/ShapeType';
 
-interface ShapeLayersProps {
-    shapes: ShapeObject[];
-}
+const ShapeLayers: FunctionComponent = () => {
+    const layers = useAppSelector((state) => state.shapes.layers);
 
-const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
     const shape = (obj: ShapeObject) => {
         switch (obj.shape.type) {
             case ShapeType.RECT:
@@ -21,7 +20,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
         }
     };
 
-    return <>{props.shapes.map((obj) => shape(obj))}</>;
+    return <>{layers.map((obj) => shape(obj))}</>;
 };
 
 export default ShapeLayers;
