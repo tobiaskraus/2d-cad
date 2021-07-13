@@ -1,41 +1,39 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from '../hooks';
-import { create as createShape } from '../features/shapes/shapesSlice';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import Icon from './components/Icon';
-import { ShapeType } from '../shapes/ShapeType';
-
-enum Tool {
-    LINE,
-    RECT,
-}
+import { setActiveTool, Tool } from '../features/tools/toolsSlice';
 
 const Toolbar: FunctionComponent = () => {
-    const [activeTool, setActiveTool] = useState(Tool.LINE);
-
+    const activeTool = useAppSelector((state) => state.tools.activeTool);
     const dispatch = useAppDispatch();
 
-    const onIconClick = (tool: Tool) => {
-        setActiveTool(tool);
-        switch (tool) {
-            case Tool.RECT:
-                dispatch(createShape(ShapeType.RECT));
+    const onToolClick = (tool: Tool) => {
+        if (tool === activeTool) {
+            return;
         }
+        dispatch(setActiveTool(tool));
     };
 
     return (
         <ToolbarWrapper>
             <Icon
+                text="H"
+                hoverText="hand"
+                active={activeTool === Tool.HAND}
+                onClick={() => onToolClick(Tool.HAND)}
+            />
+            <Icon
                 text="L"
                 hoverText="line"
-                active={activeTool === Tool.LINE}
-                onClick={() => onIconClick(Tool.LINE)}
+                active={activeTool === Tool.CREATE_LINE}
+                onClick={() => onToolClick(Tool.CREATE_LINE)}
             />
             <Icon
                 text="R"
                 hoverText="rect"
-                active={activeTool === Tool.RECT}
-                onClick={() => onIconClick(Tool.RECT)}
+                active={activeTool === Tool.CREATE_RECT}
+                onClick={() => onToolClick(Tool.CREATE_RECT)}
             />
         </ToolbarWrapper>
     );
