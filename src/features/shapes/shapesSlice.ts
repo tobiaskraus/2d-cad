@@ -38,19 +38,9 @@ export const shapesSlice = createSlice({
     name: 'shapes',
     initialState,
     reducers: {
-        create: (state, action: PayloadAction<ShapeType>) => {
+        create: (state, action: PayloadAction<ShapeObject>) => {
             console.log('create reducer called');
-            state.layers.push({
-                id: 21,
-                x: 10,
-                y: 20,
-                fill: 'blue',
-                shape: {
-                    type: ShapeType.RECT,
-                    width: 10,
-                    height: 20,
-                } as Rect,
-            });
+            state.layers.push(action.payload);
         },
     },
 });
