@@ -4,6 +4,7 @@ import { create } from '../../features/shapes/shapesSlice';
 
 import { useAppDispatch } from '../../hooks';
 import { ShapeType } from '../../shapes/ShapeType';
+import { getCoordinates } from '../viewBox/getCoordinates';
 import { ViewBox } from '../viewBox/ViewBox';
 
 interface CreateLineOverlayProps {
@@ -20,17 +21,14 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
     const dispatch = useAppDispatch();
 
     const onMouseDown = (e: React.MouseEvent<SVGElement>) => {
-        const x = e.clientX / props.viewBox.pixelsPerUnit + props.viewBox.x;
-        const y = e.clientY / props.viewBox.pixelsPerUnit + props.viewBox.y;
-        setStartPoint({ x, y });
+        setStartPoint(getCoordinates(e.clientX, e.clientY, props.viewBox));
     };
 
     const onMouseUp = (e: React.MouseEvent<SVGElement>) => {
-        const x = e.clientX / props.viewBox.pixelsPerUnit + props.viewBox.x;
-        const y = e.clientY / props.viewBox.pixelsPerUnit + props.viewBox.y;
         if (!startPoint) {
             throw Error('no startPoint');
         }
+        const coordinates = getCoordinates(e.clientX, e.clientY, props.viewBox);
         dispatch(
             create({
                 id: 44,
@@ -39,8 +37,8 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                 fill: 'red',
                 shape: {
                     type: ShapeType.LINE,
-                    x2: x,
-                    y2: y,
+                    x2: coordinates.x,
+                    y2: coordinates.y,
                 },
             })
         );
