@@ -64,7 +64,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
         <>
             {tempEndPoint !== null && startPoint !== null && (
                 <LineShape
-                    id={1001}
+                    id={new Date().getTime()}
                     x={startPoint.x}
                     y={startPoint.y}
                     fill="red"
@@ -88,9 +88,9 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
     );
 };
 
+export default CreateLineOverlay;
+
 const FullSizeOverlay = styled.rect`
     cursor: crosshair;
     fill: transparent;
 `;
-
-export default CreateLineOverlay;

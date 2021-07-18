@@ -11,7 +11,7 @@ Online 2D CAD Tool for precise drawings.
 -   [x] **Grid Labels** which show x & y values of the bigger grid lines. Positioned always at the right / bottom edge of the browser view.
 -   User can **create shapes**
     -   [ ] Rectangle
-    -   [ ] Line
+    -   [x] Line
     -   [ ] Circle
     -   [ ] Polygon
     -   [ ] Text

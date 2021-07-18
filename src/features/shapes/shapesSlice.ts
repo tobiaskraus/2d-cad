@@ -39,7 +39,6 @@ export const shapesSlice = createSlice({
     initialState,
     reducers: {
         create: (state, action: PayloadAction<ShapeObject>) => {
-            console.log('create reducer called');
             state.layers.push(action.payload);
         },
     },

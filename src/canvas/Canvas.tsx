@@ -24,7 +24,7 @@ const Canvas: FunctionComponent = () => {
             >
                 <Grid viewBox={viewBox} />
                 <ShapeLayers />
-                <ToolsOverlay viewBox={viewBox} />
+                <ToolsOverlay viewBox={viewBox} setViewBox={setViewBox} />
             </svg>
         </div>
     );
