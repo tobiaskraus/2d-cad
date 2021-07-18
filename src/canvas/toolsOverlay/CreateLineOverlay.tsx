@@ -53,8 +53,8 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
         if (!startPoint) {
             throw Error('no startPoint');
         }
-        const endPoint = getCoordinates(e.clientX, e.clientY, props.viewBox);
-        createShape(startPoint, endPoint);
+        const coordinates = getCoordinates(e.clientX, e.clientY, props.viewBox);
+        createShape(startPoint, coordinates);
 
         setStartPoint(null);
         setTempEndPoint(null);
@@ -62,15 +62,6 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
 
     return (
         <>
-            <FullSizeOverlay
-                x={props.viewBox.x}
-                y={props.viewBox.y}
-                width={props.viewBox.width}
-                height={props.viewBox.height}
-                onMouseDown={onMouseDown}
-                onMouseMove={onMouseMove}
-                onMouseUp={onMouseUp}
-            />
             {tempEndPoint !== null && startPoint !== null && (
                 <LineShape
                     id={1001}
@@ -84,13 +75,22 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                     }}
                 />
             )}
+            <FullSizeOverlay
+                x={props.viewBox.x}
+                y={props.viewBox.y}
+                width={props.viewBox.width}
+                height={props.viewBox.height}
+                onMouseDown={onMouseDown}
+                onMouseMove={onMouseMove}
+                onMouseUp={onMouseUp}
+            />
         </>
     );
 };
 
 const FullSizeOverlay = styled.rect`
     cursor: crosshair;
-    fill: #0000aa66;
+    fill: transparent;
 `;
 
 export default CreateLineOverlay;
