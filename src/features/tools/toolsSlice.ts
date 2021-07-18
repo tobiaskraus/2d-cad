@@ -24,6 +24,6 @@ export const toolsSlice = createSlice({
     },
 });
 
-export const { setActiveTool, onSvgCanvasClicked } = toolsSlice.actions;
+export const { setActiveTool } = toolsSlice.actions;
 
 export default toolsSlice.reducer;
