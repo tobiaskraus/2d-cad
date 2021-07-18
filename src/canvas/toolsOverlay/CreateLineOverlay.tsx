@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { create } from '../../features/shapes/shapesSlice';
 
 import { useAppDispatch } from '../../hooks';
+import LineShape from '../../shapes/LineShape';
 import { ShapeType } from '../../shapes/ShapeType';
 import { getCoordinates } from '../viewBox/getCoordinates';
 import { ViewBox } from '../viewBox/ViewBox';
@@ -18,30 +19,45 @@ interface Point {
 
 const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => {
     const [startPoint, setStartPoint] = useState<Point | null>(null);
+    const [tempEndPoint, setTempEndPoint] = useState<Point | null>(null);
     const dispatch = useAppDispatch();
+
+    const createShape = (start: Point, end: Point) => {
+        dispatch(
+            create({
+                id: new Date().getTime(),
+                x: start.x,
+                y: start.y,
+                fill: 'red',
+                shape: {
+                    type: ShapeType.LINE,
+                    x2: end.x,
+                    y2: end.y,
+                },
+            })
+        );
+    };
 
     const onMouseDown = (e: React.MouseEvent<SVGElement>) => {
         setStartPoint(getCoordinates(e.clientX, e.clientY, props.viewBox));
+    };
+
+    const onMouseMove = (e: React.MouseEvent<SVGElement>) => {
+        if (!startPoint) {
+            return;
+        }
+        setTempEndPoint(getCoordinates(e.clientX, e.clientY, props.viewBox));
     };
 
     const onMouseUp = (e: React.MouseEvent<SVGElement>) => {
         if (!startPoint) {
             throw Error('no startPoint');
         }
-        const coordinates = getCoordinates(e.clientX, e.clientY, props.viewBox);
-        dispatch(
-            create({
-                id: 44,
-                x: startPoint.x,
-                y: startPoint.y,
-                fill: 'red',
-                shape: {
-                    type: ShapeType.LINE,
-                    x2: coordinates.x,
-                    y2: coordinates.y,
-                },
-            })
-        );
+        const endPoint = getCoordinates(e.clientX, e.clientY, props.viewBox);
+        createShape(startPoint, endPoint);
+
+        setStartPoint(null);
+        setTempEndPoint(null);
     };
 
     return (
@@ -52,8 +68,22 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                 width={props.viewBox.width}
                 height={props.viewBox.height}
                 onMouseDown={onMouseDown}
+                onMouseMove={onMouseMove}
                 onMouseUp={onMouseUp}
             />
+            {tempEndPoint !== null && startPoint !== null && (
+                <LineShape
+                    id={1001}
+                    x={startPoint.x}
+                    y={startPoint.y}
+                    fill="red"
+                    shape={{
+                        type: ShapeType.LINE,
+                        x2: tempEndPoint.x,
+                        y2: tempEndPoint.y,
+                    }}
+                />
+            )}
         </>
     );
 };
