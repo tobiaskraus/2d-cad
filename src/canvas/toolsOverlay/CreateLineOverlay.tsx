@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
-import { create } from '../../features/shapes/shapesSlice';
+import { createShape } from '../../features/shapes/shapesSlice';
 
 import { useAppDispatch } from '../../hooks';
 import { Point } from '../../models/Point';
@@ -18,9 +18,9 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
     const [tempEndPoint, setTempEndPoint] = useState<Point | null>(null);
     const dispatch = useAppDispatch();
 
-    const createShape = (start: Point, end: Point) => {
+    const createLine = (start: Point, end: Point) => {
         dispatch(
-            create({
+            createShape({
                 id: new Date().getTime(),
                 x: start.x,
                 y: start.y,
@@ -50,7 +50,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
             throw Error('no startPoint');
         }
         const coordinates = getCoordinates(e.clientX, e.clientY, props.viewBox);
-        createShape(startPoint, coordinates);
+        createLine(startPoint, coordinates);
 
         setStartPoint(null);
         setTempEndPoint(null);

@@ -4,10 +4,12 @@ import { ShapeObject } from '../../shapes/ShapeObject';
 import { ShapeType } from '../../shapes/ShapeType';
 
 export interface ShapesState {
+    selectedIds: number[];
     layers: ShapeObject[];
 }
 
 export const initialState: ShapesState = {
+    selectedIds: [],
     layers: [
         {
             id: 1,
@@ -38,12 +40,19 @@ export const shapesSlice = createSlice({
     name: 'shapes',
     initialState,
     reducers: {
-        create: (state, action: PayloadAction<ShapeObject>) => {
+        createShape: (state, action: PayloadAction<ShapeObject>) => {
             state.layers.push(action.payload);
+        },
+        /** pass empty array in order to deselect */
+        selectShape: (state, action: PayloadAction<{ ids: number[] }>) => {
+            state.selectedIds = action.payload.ids;
+            state.layers
+                .filter((shape) => action.payload.ids.includes(shape.id))
+                .map((shape) => (shape.selected = true));
         },
     },
 });
 
-export const { create } = shapesSlice.actions;
+export const { createShape, selectShape } = shapesSlice.actions;
 
 export default shapesSlice.reducer;

@@ -18,6 +18,12 @@ const Toolbar: FunctionComponent = () => {
     return (
         <ToolbarWrapper>
             <Icon
+                text="S"
+                hoverText="select"
+                active={activeTool === Tool.SELECT}
+                onClick={() => onToolClick(Tool.SELECT)}
+            />
+            <Icon
                 text="H"
                 hoverText="hand"
                 active={activeTool === Tool.HAND}

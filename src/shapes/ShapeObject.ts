@@ -9,4 +9,5 @@ export interface ShapeObject<T extends Shapes = Shapes> {
     y: number;
     shape: T;
     fill?: string;
+    selected?: boolean;
 }

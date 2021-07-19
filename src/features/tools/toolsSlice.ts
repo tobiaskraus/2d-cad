@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export enum Tool {
+    SELECT,
     HAND,
     CREATE_LINE,
     CREATE_RECT,
