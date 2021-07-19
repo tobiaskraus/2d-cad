@@ -15,6 +15,8 @@ Online 2D CAD Tool for precise drawings.
     -   [ ] Circle
     -   [ ] Polygon
     -   [ ] Text
+-   [x] Select objects
+-   [x] Delete objects
 -   [ ] Show edge length of shapes
 -   [ ] Show area of shapes
 -   [ ] History / Redo feature

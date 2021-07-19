@@ -43,6 +43,7 @@ export const shapesSlice = createSlice({
         createShape: (state, action: PayloadAction<ShapeObject>) => {
             state.layers.push(action.payload);
         },
+
         /** pass empty array in order to deselect */
         selectShape: (state, action: PayloadAction<{ ids: number[] }>) => {
             state.selectedIds = action.payload.ids;
@@ -50,9 +51,13 @@ export const shapesSlice = createSlice({
                 .filter((shape) => action.payload.ids.includes(shape.id))
                 .map((shape) => (shape.selected = true));
         },
+
+        deleteSelectedShape: (state) => {
+            state.layers = state.layers.filter((layer) => !state.selectedIds.includes(layer.id));
+        },
     },
 });
 
-export const { createShape, selectShape } = shapesSlice.actions;
+export const { createShape, selectShape, deleteSelectedShape } = shapesSlice.actions;
 
 export default shapesSlice.reducer;
