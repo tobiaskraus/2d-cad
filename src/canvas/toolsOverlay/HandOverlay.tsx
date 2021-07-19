@@ -1,5 +1,8 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
+
+import { Point } from '../../models/Point';
+import { getCoordinates } from '../viewBox/getCoordinates';
 import { ViewBox } from '../viewBox/ViewBox';
 
 interface HandOverlayProps {
@@ -8,19 +11,24 @@ interface HandOverlayProps {
 }
 
 const HandOverlay: FunctionComponent<HandOverlayProps> = (props) => {
-    const [isGrabbing, setIsGrabbing] = useState(false);
+    const [grabStartPoint, setGrabStartPoint] = useState<Point | undefined>();
+    const [grabStartViewBox, setGrabStartViewBox] = useState<ViewBox | undefined>();
 
-    const onMouseDown = () => setIsGrabbing(true);
-    const onMouseUp = () => setIsGrabbing(false);
+    const onMouseDown = (e: React.MouseEvent) => {
+        setGrabStartPoint(getCoordinates(e.clientX, e.clientY, props.viewBox));
+        setGrabStartViewBox({ ...props.viewBox });
+    };
+    const onMouseUp = () => setGrabStartPoint(undefined);
 
     const onMouseMove = (e: React.MouseEvent) => {
-        if (!isGrabbing) {
+        if (!grabStartPoint || !grabStartViewBox) {
             return;
         }
+        const coordinates = getCoordinates(e.clientX, e.clientY, grabStartViewBox);
         props.setViewBox((vb) => ({
             ...vb,
-            x: vb.x - e.movementX / vb.pixelsPerUnit,
-            y: vb.y - e.movementY / vb.pixelsPerUnit,
+            x: grabStartViewBox.x - (coordinates.x - grabStartPoint.x),
+            y: grabStartViewBox.y - (coordinates.y - grabStartPoint.y),
         }));
     };
 
@@ -33,7 +41,7 @@ const HandOverlay: FunctionComponent<HandOverlayProps> = (props) => {
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
             onMouseMove={onMouseMove}
-            isGrabbing={isGrabbing}
+            isGrabbing={!!grabStartPoint}
         />
     );
 };

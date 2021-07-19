@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { create } from '../../features/shapes/shapesSlice';
 
 import { useAppDispatch } from '../../hooks';
+import { Point } from '../../models/Point';
 import LineShape from '../../shapes/LineShape';
 import { ShapeType } from '../../shapes/ShapeType';
 import { getCoordinates } from '../viewBox/getCoordinates';
@@ -10,11 +11,6 @@ import { ViewBox } from '../viewBox/ViewBox';
 
 interface CreateLineOverlayProps {
     viewBox: ViewBox;
-}
-
-interface Point {
-    x: number;
-    y: number;
 }
 
 const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => {
