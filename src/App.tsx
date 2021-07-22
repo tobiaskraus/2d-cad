@@ -28,6 +28,7 @@ const Header = styled.header`
     padding: 12px;
     position: absolute;
     z-index: 10;
-    top: 0;
-    width: 100%;
+    top: 10px;
+    left: 30px;
+    width: calc(100% - 60px);
 `;
