@@ -1,14 +1,10 @@
-import { FunctionComponent, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { deleteSelectedShape } from '../features/shapes/shapesSlice';
-import { setActiveTool, Tool } from '../features/tools/toolsSlice';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch } from '../../hooks';
+import { deleteSelectedShape } from '../shapes/shapesSlice';
+import { setActiveTool, Tool } from './toolsSlice';
 
-interface KeybindingsProps {
-    className?: string;
-}
-
-const Keybindings: FunctionComponent<KeybindingsProps> = (props) => {
+export function useKeybindings() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -35,8 +31,4 @@ const Keybindings: FunctionComponent<KeybindingsProps> = (props) => {
         window.addEventListener('keydown', onKeydown);
         return () => window.removeEventListener('keydown', onKeydown);
     }, [dispatch]);
-
-    return null;
-};
-
-export default Keybindings;
+}

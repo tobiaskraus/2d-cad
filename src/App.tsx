@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import Canvas from './canvas/Canvas';
-import Keybindings from './toolbar/Keybindings';
+import { useKeybindings } from './features/tools/useKeybindings';
 import Toolbar from './toolbar/Toolbar';
 
 function App() {
+    useKeybindings();
+
     return (
         <>
             <Header>2D CAD</Header>
             <Toolbar />
             <Canvas />
-            <Keybindings />
         </>
     );
 }
