@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { selectShape } from '../../features/shapes/shapesSlice';
-import { Tool } from '../../features/tools/toolsSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { Line } from '../../shapes/Line';
 
-import LineShape from '../../shapes/LineShape';
-import { Rect } from '../../shapes/Rect';
-import RectShape from '../../shapes/RectShape';
-import { ShapeObject } from '../../shapes/ShapeObject';
-import { ShapeType } from '../../shapes/ShapeType';
+import { selectShape } from '../../../features/shapes/shapesSlice';
+import { Tool } from '../../../features/tools/toolsSlice';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { Line } from '../../../shapes/Line';
+import LineShape from '../../../shapes/LineShape';
+import { Rect } from '../../../shapes/Rect';
+import RectShape from '../../../shapes/RectShape';
+import { ShapeObject } from '../../../shapes/ShapeObject';
+import { ShapeType } from '../../../shapes/ShapeType';
 
 const ShapeLayers: FunctionComponent = () => {
     const layers = useAppSelector((state) => state.shapes.layers);

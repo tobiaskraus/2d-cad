@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
-import { createShape } from '../../features/shapes/shapesSlice';
 
-import { useAppDispatch } from '../../hooks';
-import { Point } from '../../models/Point';
-import LineShape from '../../shapes/LineShape';
-import { ShapeType } from '../../shapes/ShapeType';
+import { createShape } from '../../../features/shapes/shapesSlice';
+import { useAppDispatch } from '../../../hooks';
+import { Point } from '../../../models/Point';
+import LineShape from '../../../shapes/LineShape';
+import { ShapeType } from '../../../shapes/ShapeType';
 import { getCoordinates } from '../viewBox/getCoordinates';
 import { ViewBox } from '../viewBox/ViewBox';
 

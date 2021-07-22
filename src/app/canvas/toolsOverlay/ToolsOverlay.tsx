@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Tool } from '../../features/tools/toolsSlice';
-import { useAppSelector } from '../../hooks';
+
+import { Tool } from '../../../features/tools/toolsSlice';
+import { useAppSelector } from '../../../hooks';
 import { ViewBox } from '../viewBox/ViewBox';
 import CreateLineOverlay from './CreateLineOverlay';
 import HandOverlay from './HandOverlay';

@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../hooks';
+
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setActiveTool, Tool } from '../../features/tools/toolsSlice';
 import Icon from './components/Icon';
-import { setActiveTool, Tool } from '../features/tools/toolsSlice';
 
 const Toolbar: FunctionComponent = () => {
     const activeTool = useAppSelector((state) => state.tools.activeTool);

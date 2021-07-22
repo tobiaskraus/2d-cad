@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
+import { useKeybindings } from '../features/tools/useKeybindings';
 import Canvas from './canvas/Canvas';
-import { useKeybindings } from './features/tools/useKeybindings';
 import Toolbar from './toolbar/Toolbar';
 
 function App() {

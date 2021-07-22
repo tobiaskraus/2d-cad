@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 
-import { Point } from '../../models/Point';
+import { Point } from '../../../models/Point';
 import { getCoordinates } from '../viewBox/getCoordinates';
 import { ViewBox } from '../viewBox/ViewBox';
 
