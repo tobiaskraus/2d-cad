@@ -18,12 +18,21 @@ const LineShape: FunctionComponent<LineShapeProps> = (props) => (
             />
         )}
         <line
-            onClick={props.onClick}
             x1={props.x}
             y1={props.y}
             x2={props.shape.x2}
             y2={props.shape.y2}
             style={{ stroke: props.fill, strokeWidth: 0.2 }}
+        />
+        {/* Click wrapper */}
+        <line
+            stroke="transparent"
+            onClick={props.onClick}
+            strokeWidth={1}
+            x1={props.x}
+            y1={props.y}
+            x2={props.shape.x2}
+            y2={props.shape.y2}
         />
     </>
 );
