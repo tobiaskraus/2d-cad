@@ -31,6 +31,7 @@ const LineLabels: FunctionComponent<LineLabelsProps> = (props) => {
                     x={x}
                     y={props.viewBox.height - props.viewBox.height * 0.01 + props.viewBox.y}
                     fontSize={props.gridGapSizes.small}
+                    style={{ userSelect: 'none' }}
                 >
                     {x}
                 </text>
@@ -42,6 +43,7 @@ const LineLabels: FunctionComponent<LineLabelsProps> = (props) => {
                     y={y}
                     x={props.viewBox.width - props.viewBox.width * 0.01 + props.viewBox.x}
                     fontSize={props.gridGapSizes.small}
+                    style={{ userSelect: 'none' }}
                 >
                     {y}
                 </text>
