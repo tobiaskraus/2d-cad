@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { zoom } from './zoom';
 import { ViewBox } from './ViewBox';
 
+const SCROLL_MOVE_SPEED = 0.1;
+
 interface ViewBoxControlProps {
     onChange: (cb: (valOld: ViewBox) => ViewBox) => void;
 }
@@ -14,7 +16,15 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
     const { onChange } = props;
     useEffect(() => {
         const onWheel = (e: WheelEvent) => {
-            onChange((vb) => zoom(vb, e.deltaY));
+            if (e.ctrlKey) {
+                onChange((vb) => zoom(vb, e.deltaY));
+            } else {
+                onChange((vb) => ({
+                    ...vb,
+                    x: vb.x + e.deltaX * SCROLL_MOVE_SPEED,
+                    y: vb.y + e.deltaY * SCROLL_MOVE_SPEED,
+                }));
+            }
         };
         window.addEventListener('wheel', onWheel);
         return () => {
