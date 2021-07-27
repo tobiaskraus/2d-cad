@@ -6,48 +6,74 @@ Online 2D CAD Tool for precise drawings.
 
 ## Features
 
--   [x] Fullsceen svg (our canvas) where user can **zoom** and **move around** (basic buttons for navigation)
--   [x] **Grid** grid in the background, which gets smaller gaps when zooming in (and vise versa)
--   [x] **Grid Labels** which show x & y values of the bigger grid lines. Positioned always at the right / bottom edge of the browser view.
--   User can **create shapes**
-    -   [ ] Rectangle
+-   [x] **zoom**: endless zooming via wheel events and zoom buttons
+-   [x] **pan**: moving the view by grabbing & moving the mouse when **hand tool** is selected)
+-   [x] **grid** in the background, which gets smaller gaps when zooming in (and vise versa)
+-   [x] **grid labels** which show x & y values of the bigger grid lines. Positioned always at the right / bottom edge of the browser view.
+-   user can **create shapes**
+
+    -   [x] Rectangle
     -   [x] Line
     -   [ ] Circle
     -   [ ] Polygon
     -   [ ] Text
--   [x] Select objects
--   [x] Delete objects
--   [ ] Show edge length of shapes
--   [ ] Show area of shapes
--   [ ] History / Redo feature
--   [ ] User can upload **background images**
 
-## Motivation
-
-(2021-02-14)
-
-I messured the front of my kitchen and wanted to create a precise scale plan digitally without learning a complicated tool or paying for some account.
-
-I tried the following tools and weren't happy with any of those (for my purpose):
-
--   draw.io
-    -   measurement are either px or mm/inch, but you cannot even scale the document how you want
-    -   doesn't calculate and show areas
--   libreCAD
-    -   need's installation
-    -   difficult to create a plan (by commands & and a lot of typing)
-    -   you cannot edit the rectangles afterwards (just scale them)
-    -   you cannot show the messurements or areas of forms (you need to create manually some dimension lines)
-
-## Idea
-
-A drawing tool based on svg which is easy to use, and where it's possible to
-
--   create forms / lines in exact sizes & positions
--   enable labels for forms & lines:
-    -   length
-    -   area
 -   edit global scale and units
+-   [x] select objects
+-   [x] delete objects
+-   [ ] show edge length of shapes
+-   [ ] show area of shapes
+-   [ ] history / redo feature
+-   [ ] user can upload **background images**
+-   [ ] create shapes in exact sizes & positions (form input)
+-   [ ] labels for shapes:
+    -   text
+    -   area (length if shape is line)
+-   [ ] labels for edges:
+    -   text
+    -   length
+
+## Why this tool?
+
+-   web application (no installation)
+-   free
+-   easy to use
+-   create shapes with precise sizes
+-   dynamic scale (no matter if the plan consists of many kilometers or some millimeters)
+-   get most important geometric information
+    -   area
+    -   length of edges
+    -   angles
+-   endless zooming
+-   export svg
+    -   which is 100% accurate to what you see while editing, as the whole tool is svg based
+
+### Benefit vs ...
+
+draw.io
+
+-   measurement are either px or mm/inch, but you cannot even scale the document how you want
+-   doesn't calculate and show areas
+
+libreCAD
+
+-   need's installation
+-   difficult to create a plan (by commands & and a lot of typing)
+-   you cannot edit the rectangles afterwards (just scale them)
+-   you cannot show the measurements or areas of forms (you need to create manually some dimension lines)
+
+miro.com
+
+-   different focus: mindmaps, moodboards, etc. instead of precise plans
+-   miro has no units and therefore no possibility to draw something true to scale
+
+### Personal motivation
+
+It all started with me moving to a new apartment. First I wanted to plan my kitchen by drawing the single elements in a front view and moving them around.
+Miro was nice, as it was a web app (no installation), for free and easy to use. The problem: it didn't have any possibility to create shapes true to scale.
+
+Later I planned to install some fairy lights on my balcony ceiling in a zigzag pattern, but didn't know the length I needed to cover the area.
+So I decided to create a tool where users can create shapes true to scale and get the most important geometric information (area, length, ...).
 
 ## Develop
 
