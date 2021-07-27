@@ -1,4 +1,4 @@
-import { zoomIn, zoomOut } from './zoom';
+import { zoom } from './zoom';
 import { ViewBox } from './ViewBox';
 
 describe('zoom', () => {
@@ -9,6 +9,17 @@ describe('zoom', () => {
         height: 6,
         pixelsPerUnit: 1,
     };
+
+    it('positive deltaY -> zoom out', () => {
+        expect(zoom(vb, 0.5).pixelsPerUnit).toBeLessThan(vb.pixelsPerUnit);
+    });
+
+    it('negative deltaY -> zoom in', () => {
+        expect(zoom(vb, -1.5).pixelsPerUnit).toBeGreaterThan(vb.pixelsPerUnit);
+    });
+
+    const zoomIn = (vb: ViewBox) => zoom(vb, -200);
+    const zoomOut = (vb: ViewBox) => zoom(vb, 200);
 
     it('zoomIn: width & height reduces', () => {
         const vb2 = zoomIn(vb);
@@ -22,6 +33,12 @@ describe('zoom', () => {
 
         expect(vb2.width).toBeGreaterThan(vb.width);
         expect(vb2.height).toBeGreaterThan(vb.height);
+    });
+
+    it('zoomIn: pixelsPerUnit increases', () => {
+        const vb2 = zoomIn(vb);
+
+        expect(vb2.pixelsPerUnit).toBeGreaterThan(vb.pixelsPerUnit);
     });
 
     it('zoomIn then zoomOut: same ViewBox expected', () => {

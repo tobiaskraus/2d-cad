@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+
 import Grid from './grid/Grid';
 import ViewBoxControl from './viewBox/ViewBoxControl';
 import { useViewBox } from './viewBox/useViewBox';
@@ -10,7 +11,7 @@ const Canvas: FunctionComponent = () => {
 
     return (
         <div>
-            <ViewBoxControl value={viewBox} onChange={setViewBox} />
+            <ViewBoxControl onChange={setViewBox} />
             <svg
                 preserveAspectRatio="xMidYMid slice"
                 viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}

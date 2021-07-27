@@ -1,24 +1,33 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { zoomIn, zoomOut } from './zoom';
+import { zoom } from './zoom';
 import { ViewBox } from './ViewBox';
 
 interface ViewBoxControlProps {
-    className?: string;
-    value: ViewBox;
     onChange: (cb: (valOld: ViewBox) => ViewBox) => void;
 }
 
 const moveStep = 10;
 
 const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
-    const moveUp = () => props.onChange((vb) => ({ ...vb, y: vb.y - moveStep }));
-    const moveDown = () => props.onChange((vb) => ({ ...vb, y: vb.y + moveStep }));
-    const moveLeft = () => props.onChange((vb) => ({ ...vb, x: vb.x - moveStep }));
-    const moveRight = () => props.onChange((vb) => ({ ...vb, x: vb.x + moveStep }));
-    const onZoomIn = () => props.onChange((vb) => zoomIn(vb));
-    const onZoomOut = () => props.onChange((vb) => zoomOut(vb));
+    const { onChange } = props;
+    useEffect(() => {
+        const onWheel = (e: WheelEvent) => {
+            onChange((vb) => zoom(vb, e.deltaY));
+        };
+        window.addEventListener('wheel', onWheel);
+        return () => {
+            window.removeEventListener('wheel', onWheel);
+        };
+    }, [onChange]);
+
+    const moveUp = () => onChange((vb) => ({ ...vb, y: vb.y - moveStep }));
+    const moveDown = () => onChange((vb) => ({ ...vb, y: vb.y + moveStep }));
+    const moveLeft = () => onChange((vb) => ({ ...vb, x: vb.x - moveStep }));
+    const moveRight = () => onChange((vb) => ({ ...vb, x: vb.x + moveStep }));
+    const onZoomIn = () => onChange((vb) => zoom(vb, -200));
+    const onZoomOut = () => onChange((vb) => zoom(vb, 200));
 
     return (
         <Wrapper>
