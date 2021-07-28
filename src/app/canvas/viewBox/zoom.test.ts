@@ -45,16 +45,16 @@ describe('zoom', () => {
         const vb2 = zoomIn(vb);
         const vb3 = zoomOut(vb2);
 
-        expect(vb3.width).toEqual(vb.width);
-        expect(vb3.height).toEqual(vb.height);
+        expect(vb3.width).toBeCloseTo(vb.width);
+        expect(vb3.height).toBeCloseTo(vb.height);
     });
 
     it('zoomOut then zoomIn: same ViewBox expected', () => {
         const vb2 = zoomOut(vb);
         const vb3 = zoomIn(vb2);
 
-        expect(vb3.width).toEqual(vb.width);
-        expect(vb3.height).toEqual(vb.height);
+        expect(vb3.width).toBeCloseTo(vb.width);
+        expect(vb3.height).toBeCloseTo(vb.height);
     });
 
     it('zoomIn: center should be pivot', () => {
