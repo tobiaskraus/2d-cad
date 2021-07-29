@@ -14,6 +14,9 @@ export function useKeybindings() {
                 case 'Backspace':
                     dispatch(deleteSelectedShape());
                     break;
+                case 'Escape':
+                    dispatch(setActiveTool(Tool.HAND));
+                    break;
                 case 'h':
                     dispatch(setActiveTool(Tool.HAND));
                     break;
@@ -28,7 +31,10 @@ export function useKeybindings() {
                     break;
             }
         };
+
         window.addEventListener('keydown', onKeydown);
-        return () => window.removeEventListener('keydown', onKeydown);
+        return () => {
+            window.removeEventListener('keydown', onKeydown);
+        };
     }, [dispatch]);
 }

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { zoom } from './zoom';
@@ -12,10 +12,30 @@ interface ViewBoxControlProps {
     onChange: (cb: (valOld: ViewBox) => ViewBox) => void;
 }
 
-const moveStep = 10;
+const MOVE_STEP_FACTOR = 0.2;
 
 const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
     const { onChange } = props;
+
+    const moveUp = useCallback(
+        () => onChange((vb) => ({ ...vb, y: vb.y - MOVE_STEP_FACTOR * vb.height })),
+        [onChange]
+    );
+    const moveDown = useCallback(
+        () => onChange((vb) => ({ ...vb, y: vb.y + MOVE_STEP_FACTOR * vb.height })),
+        [onChange]
+    );
+    const moveLeft = useCallback(
+        () => onChange((vb) => ({ ...vb, x: vb.x - MOVE_STEP_FACTOR * vb.width })),
+        [onChange]
+    );
+    const moveRight = useCallback(
+        () => onChange((vb) => ({ ...vb, x: vb.x + MOVE_STEP_FACTOR * vb.width })),
+        [onChange]
+    );
+    const onZoomIn = () => onChange((vb) => zoom(vb, -200));
+    const onZoomOut = () => onChange((vb) => zoom(vb, 200));
+
     useEffect(() => {
         const onWheel = (e: WheelEvent) => {
             if (e.ctrlKey) {
@@ -29,18 +49,32 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
                 }));
             }
         };
+
+        const onKeydown = (e: KeyboardEvent) => {
+            switch (e.key) {
+                case 'ArrowUp':
+                    moveUp();
+                    break;
+                case 'ArrowDown':
+                    moveDown();
+                    break;
+                case 'ArrowLeft':
+                    moveLeft();
+                    break;
+                case 'ArrowRight':
+                    moveRight();
+                    break;
+            }
+        };
+
         window.addEventListener('wheel', onWheel);
+        window.addEventListener('keydown', onKeydown);
+
         return () => {
             window.removeEventListener('wheel', onWheel);
+            window.removeEventListener('keydown', onKeydown);
         };
-    }, [onChange, props.viewBox]);
-
-    const moveUp = () => onChange((vb) => ({ ...vb, y: vb.y - moveStep }));
-    const moveDown = () => onChange((vb) => ({ ...vb, y: vb.y + moveStep }));
-    const moveLeft = () => onChange((vb) => ({ ...vb, x: vb.x - moveStep }));
-    const moveRight = () => onChange((vb) => ({ ...vb, x: vb.x + moveStep }));
-    const onZoomIn = () => onChange((vb) => zoom(vb, -200));
-    const onZoomOut = () => onChange((vb) => zoom(vb, 200));
+    }, [onChange, props.viewBox, moveUp, moveDown, moveLeft, moveRight]);
 
     return (
         <Wrapper>
