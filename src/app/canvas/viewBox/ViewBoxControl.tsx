@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 import { zoom } from './zoom';
 import { ViewBox } from './ViewBox';
+import { getCoordinates } from './getCoordinates';
 
 const SCROLL_MOVE_SPEED = 0.1;
 
 interface ViewBoxControlProps {
+    viewBox: ViewBox;
     onChange: (cb: (valOld: ViewBox) => ViewBox) => void;
 }
 
@@ -17,7 +19,8 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
     useEffect(() => {
         const onWheel = (e: WheelEvent) => {
             if (e.ctrlKey) {
-                onChange((vb) => zoom(vb, e.deltaY));
+                const centerPoint = getCoordinates(e.clientX, e.clientY, props.viewBox);
+                onChange((vb) => zoom(vb, e.deltaY, centerPoint));
             } else {
                 onChange((vb) => ({
                     ...vb,
@@ -30,7 +33,7 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
         return () => {
             window.removeEventListener('wheel', onWheel);
         };
-    }, [onChange]);
+    }, [onChange, props.viewBox]);
 
     const moveUp = () => onChange((vb) => ({ ...vb, y: vb.y - moveStep }));
     const moveDown = () => onChange((vb) => ({ ...vb, y: vb.y + moveStep }));

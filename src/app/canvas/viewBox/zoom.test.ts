@@ -1,15 +1,30 @@
-import { zoom } from './zoom';
+import { getRelativeCursorPoint, zoom } from './zoom';
 import { ViewBox } from './ViewBox';
+import { Point } from '../../../models/Point';
+
+const vb: ViewBox = {
+    x: 0,
+    y: 0,
+    width: 10,
+    height: 6,
+    pixelsPerUnit: 1,
+};
+
+describe('getRelativeCursorPoint', () => {
+    it('top left should be x: 0, y: 0', () => {
+        expect(getRelativeCursorPoint({ x: 0, y: 0 }, vb)).toEqual({ x: 0, y: 0 });
+    });
+
+    it('bottom right should be x: 1, y: 1', () => {
+        expect(getRelativeCursorPoint({ x: 10, y: 6 }, vb)).toEqual({ x: 1, y: 1 });
+    });
+
+    it('center should be x: 0.5, y: 0.5', () => {
+        expect(getRelativeCursorPoint({ x: 5, y: 3 }, vb)).toEqual({ x: 0.5, y: 0.5 });
+    });
+});
 
 describe('zoom', () => {
-    const vb: ViewBox = {
-        x: 0,
-        y: 0,
-        width: 10,
-        height: 6,
-        pixelsPerUnit: 1,
-    };
-
     it('positive deltaY -> zoom out', () => {
         expect(zoom(vb, 0.5).pixelsPerUnit).toBeLessThan(vb.pixelsPerUnit);
     });
@@ -76,6 +91,17 @@ describe('zoom', () => {
 
         expect(vb2.pixelsPerUnit).toBeLessThan(vb.pixelsPerUnit);
         expect(vb2.pixelsPerUnit).toBeGreaterThan(0);
+    });
+
+    it('zoomOut: cursor Position should be fixed', () => {
+        const cursorPoint: Point = { x: 2, y: 4 };
+        const vb2 = zoom(vb, 200, cursorPoint);
+
+        const relativeCursorPoint = {
+            before: getRelativeCursorPoint(cursorPoint, vb),
+            after: getRelativeCursorPoint(cursorPoint, vb2),
+        };
+        expect(relativeCursorPoint.before).toEqual(relativeCursorPoint.after);
     });
 });
 

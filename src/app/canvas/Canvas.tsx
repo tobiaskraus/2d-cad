@@ -11,7 +11,7 @@ const Canvas: FunctionComponent = () => {
 
     return (
         <div>
-            <ViewBoxControl onChange={setViewBox} />
+            <ViewBoxControl viewBox={viewBox} onChange={setViewBox} />
             <svg
                 preserveAspectRatio="xMidYMid slice"
                 viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
