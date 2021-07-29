@@ -70,6 +70,13 @@ describe('zoom', () => {
         expect(getCenterX(vb2)).toEqual(getCenterX(vb));
         expect(getCenterY(vb2)).toEqual(getCenterY(vb));
     });
+
+    it('zoomOut: extreme value (deltaY > 10000) should return valid viewBox', () => {
+        const vb2 = zoom(vb, 10000);
+
+        expect(vb2.pixelsPerUnit).toBeLessThan(vb.pixelsPerUnit);
+        expect(vb2.pixelsPerUnit).toBeGreaterThan(0);
+    });
 });
 
 const getCenterX = (vb: ViewBox) => vb.x + vb.width * 0.5;

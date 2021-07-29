@@ -1,6 +1,7 @@
 import { ViewBox } from './ViewBox';
 
 const ZOOM_SPEED = 0.001;
+const MAX_ZOOM_OUT_FACTOR = 0.9; // factor above 1.0 can break the code
 
 /**
  * @param vb current viewBox
@@ -16,12 +17,8 @@ export function zoom(vb: ViewBox, deltaY: number) {
         pixelsPerUnit = vb.pixelsPerUnit / (1 + zoomFactor);
     } else {
         // zoom out
-        pixelsPerUnit = vb.pixelsPerUnit - vb.pixelsPerUnit * zoomFactor;
-    }
-
-    // if deltaY is so high that pixelsPerUnit are about to become 0 (or even become negative) ...
-    if (pixelsPerUnit <= 0.1 * vb.pixelsPerUnit) {
-        pixelsPerUnit = 0.1 * vb.pixelsPerUnit;
+        pixelsPerUnit =
+            vb.pixelsPerUnit - vb.pixelsPerUnit * Math.min(zoomFactor, MAX_ZOOM_OUT_FACTOR);
     }
 
     const factor = vb.pixelsPerUnit / pixelsPerUnit;
