@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { config } from '../../../config';
 
+import { config } from '../../../config';
 import { selectShape } from '../../../features/shapes/shapesSlice';
 import { Tool } from '../../../features/tools/toolsSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';

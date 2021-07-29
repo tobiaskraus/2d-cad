@@ -4,33 +4,30 @@ import styled from 'styled-components';
 import { zoom } from './zoom';
 import { ViewBox } from './ViewBox';
 import { getCoordinates } from './getCoordinates';
-
-const SCROLL_MOVE_SPEED = 0.1;
+import { config } from '../../../config';
 
 interface ViewBoxControlProps {
     viewBox: ViewBox;
     onChange: (cb: (valOld: ViewBox) => ViewBox) => void;
 }
 
-const MOVE_STEP_FACTOR = 0.2;
-
 const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
     const { onChange } = props;
 
     const moveUp = useCallback(
-        () => onChange((vb) => ({ ...vb, y: vb.y - MOVE_STEP_FACTOR * vb.height })),
+        () => onChange((vb) => ({ ...vb, y: vb.y - config.MOVE_STEP_FACTOR * vb.height })),
         [onChange]
     );
     const moveDown = useCallback(
-        () => onChange((vb) => ({ ...vb, y: vb.y + MOVE_STEP_FACTOR * vb.height })),
+        () => onChange((vb) => ({ ...vb, y: vb.y + config.MOVE_STEP_FACTOR * vb.height })),
         [onChange]
     );
     const moveLeft = useCallback(
-        () => onChange((vb) => ({ ...vb, x: vb.x - MOVE_STEP_FACTOR * vb.width })),
+        () => onChange((vb) => ({ ...vb, x: vb.x - config.MOVE_STEP_FACTOR * vb.width })),
         [onChange]
     );
     const moveRight = useCallback(
-        () => onChange((vb) => ({ ...vb, x: vb.x + MOVE_STEP_FACTOR * vb.width })),
+        () => onChange((vb) => ({ ...vb, x: vb.x + config.MOVE_STEP_FACTOR * vb.width })),
         [onChange]
     );
     const onZoomIn = () => onChange((vb) => zoom(vb, -200));
@@ -44,8 +41,8 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
             } else {
                 onChange((vb) => ({
                     ...vb,
-                    x: vb.x + e.deltaX * SCROLL_MOVE_SPEED,
-                    y: vb.y + e.deltaY * SCROLL_MOVE_SPEED,
+                    x: vb.x + e.deltaX * config.SCROLL_MOVE_SPEED * vb.width,
+                    y: vb.y + e.deltaY * config.SCROLL_MOVE_SPEED * vb.width,
                 }));
             }
         };
