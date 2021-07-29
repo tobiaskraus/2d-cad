@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { zoom } from './zoom';
-import { ViewBox } from './ViewBox';
+import { getInitialViewBox, ViewBox } from './ViewBox';
 import { getCoordinates } from './getCoordinates';
 import { config } from '../../../config';
 
@@ -32,6 +32,7 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
     );
     const onZoomIn = () => onChange((vb) => zoom(vb, -200));
     const onZoomOut = () => onChange((vb) => zoom(vb, 200));
+    const reset = () => onChange((vb) => getInitialViewBox());
 
     useEffect(() => {
         const onWheel = (e: WheelEvent) => {
@@ -81,7 +82,7 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
                 <span />
 
                 <Control onClick={moveLeft}>◄</Control>
-                <span />
+                <Control onClick={reset}>reset</Control>
                 <Control onClick={moveRight}>►</Control>
 
                 <span />

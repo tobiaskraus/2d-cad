@@ -7,13 +7,13 @@ export interface ViewBox {
     pixelsPerUnit: number;
 }
 
-export const defaultViewBox: ViewBox = {
-    x: 30,
-    y: 40,
-    width: 0,
-    height: 0,
-    pixelsPerUnit: 10,
-};
+export function getInitialViewBox(): ViewBox {
+    return getViewBox({
+        pixelsPerUnit: 10,
+        centerX: 30,
+        centerY: 40,
+    });
+}
 
 export function getViewBox(params: {
     pixelsPerUnit: number;

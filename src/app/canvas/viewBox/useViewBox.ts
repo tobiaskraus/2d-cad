@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { defaultViewBox, getViewBox, ViewBox } from './ViewBox';
+import { getInitialViewBox, getViewBox, ViewBox } from './ViewBox';
 
 /** returns state & dispatcher of viewBox and handles window resizing */
 export function useViewBox(): [ViewBox, React.Dispatch<React.SetStateAction<ViewBox>>] {
-    const [viewBox, setViewBox] = useState<ViewBox>(defaultViewBox);
+    const [viewBox, setViewBox] = useState<ViewBox>(getInitialViewBox());
 
     // on resize
     useEffect(() => {
@@ -18,9 +18,6 @@ export function useViewBox(): [ViewBox, React.Dispatch<React.SetStateAction<View
             );
         }
         window.addEventListener('resize', onResize);
-
-        // adjust viewBox initially to window size
-        onResize();
 
         return () => {
             window.removeEventListener('resize', onResize);
