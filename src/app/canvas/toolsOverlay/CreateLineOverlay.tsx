@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
+import { config } from '../../../config';
 
 import { createShape } from '../../../features/shapes/shapesSlice';
 import { useAppDispatch } from '../../../hooks';
@@ -17,6 +18,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
     const [startPoint, setStartPoint] = useState<Point | null>(null);
     const [tempEndPoint, setTempEndPoint] = useState<Point | null>(null);
     const dispatch = useAppDispatch();
+    const strokeWidth = (props.viewBox.height + props.viewBox.width) * config.RELATIVE_STROKE_WIDTH;
 
     const createLine = (start: Point, end: Point) => {
         dispatch(
@@ -63,6 +65,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                     id={new Date().getTime()}
                     x={startPoint.x}
                     y={startPoint.y}
+                    strokeWidth={strokeWidth}
                     fill="red"
                     shape={{
                         type: ShapeType.LINE,

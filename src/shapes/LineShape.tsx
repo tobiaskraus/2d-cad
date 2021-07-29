@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { Line } from './Line';
 import { ShapeObject } from './ShapeObject';
 
-type LineShapeProps = ShapeObject<Line> & { onClick?: () => void };
+type LineShapeProps = ShapeObject<Line> & { onClick?: () => void; strokeWidth: number };
 
 const LineShape: FunctionComponent<LineShapeProps> = (props) => (
     <>
@@ -14,7 +14,7 @@ const LineShape: FunctionComponent<LineShapeProps> = (props) => (
                 y1={props.y}
                 x2={props.shape.x2}
                 y2={props.shape.y2}
-                style={{ stroke: 'cyan', strokeWidth: 0.4 }}
+                style={{ stroke: 'cyan', strokeWidth: props.strokeWidth * 2 }}
             />
         )}
         <line
@@ -22,13 +22,13 @@ const LineShape: FunctionComponent<LineShapeProps> = (props) => (
             y1={props.y}
             x2={props.shape.x2}
             y2={props.shape.y2}
-            style={{ stroke: props.fill, strokeWidth: 0.2 }}
+            style={{ stroke: props.fill, strokeWidth: props.strokeWidth }}
         />
         {/* Click wrapper */}
         <line
             stroke="transparent"
             onClick={props.onClick}
-            strokeWidth={1}
+            strokeWidth={props.strokeWidth * 10}
             x1={props.x}
             y1={props.y}
             x2={props.shape.x2}

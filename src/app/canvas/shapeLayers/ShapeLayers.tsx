@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import { config } from '../../../config';
 
 import { selectShape } from '../../../features/shapes/shapesSlice';
 import { Tool } from '../../../features/tools/toolsSlice';
@@ -20,6 +21,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
     const layers = useAppSelector((state) => state.shapes.layers);
     const activeTool = useAppSelector((state) => state.tools.activeTool);
     const dispatch = useAppDispatch();
+    const strokeWidth = (props.viewBox.height + props.viewBox.width) * config.RELATIVE_STROKE_WIDTH;
 
     const onShapeClick = (id: number) => {
         if (activeTool === Tool.SELECT) {
@@ -40,6 +42,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
                 return (
                     <RectShape
                         onClick={() => onShapeClick(obj.id)}
+                        strokeWidth={strokeWidth}
                         key={obj.id}
                         {...(obj as ShapeObject<Rect>)}
                     />
@@ -48,6 +51,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
                 return (
                     <LineShape
                         onClick={() => onShapeClick(obj.id)}
+                        strokeWidth={strokeWidth}
                         key={obj.id}
                         {...(obj as ShapeObject<Line>)}
                     />
