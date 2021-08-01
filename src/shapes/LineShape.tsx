@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import Ruler from '../app/canvas/Ruler/Ruler';
 
 import { Line } from './Line';
 import { ShapeObject } from './ShapeObject';
@@ -17,6 +18,7 @@ const LineShape: FunctionComponent<LineShapeProps> = (props) => (
                 style={{ stroke: 'cyan', strokeWidth: props.strokeWidth * 2 }}
             />
         )}
+        <Ruler p1={{ x: props.x, y: props.y }} p2={{ x: props.shape.x2, y: props.shape.y2 }} />
         <line
             x1={props.x}
             y1={props.y}

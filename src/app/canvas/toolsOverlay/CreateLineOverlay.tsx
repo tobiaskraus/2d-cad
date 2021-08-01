@@ -7,8 +7,7 @@ import { useAppDispatch } from '../../../hooks';
 import { Point } from '../../../models/Point';
 import LineShape from '../../../shapes/LineShape';
 import { ShapeType } from '../../../shapes/ShapeType';
-import { lineCenter } from '../../../utils/geometry/lineCenter';
-import { lineLength } from '../../../utils/geometry/lineLength';
+import Ruler from '../Ruler/Ruler';
 import { getCoordinates } from '../viewBox/getCoordinates';
 import { ViewBox } from '../viewBox/ViewBox';
 
@@ -28,7 +27,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                 id: new Date().getTime(),
                 x: start.x,
                 y: start.y,
-                fill: 'red',
+                fill: '#0783a2',
                 shape: {
                     type: ShapeType.LINE,
                     x2: end.x,
@@ -76,14 +75,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                             y2: tempEndPoint.y,
                         }}
                     />
-                    <text
-                        {...lineCenter(startPoint, tempEndPoint)}
-                        fontSize={1}
-                        style={{ userSelect: 'none', backgroundColor: 'white' }}
-                        textAnchor="middle"
-                    >
-                        {lineLength(startPoint, tempEndPoint)}
-                    </text>
+                    <Ruler p1={startPoint} p2={tempEndPoint} />
                 </>
             )}
             <FullSizeOverlay
