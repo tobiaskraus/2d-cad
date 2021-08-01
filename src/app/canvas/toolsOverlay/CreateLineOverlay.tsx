@@ -7,6 +7,8 @@ import { useAppDispatch } from '../../../hooks';
 import { Point } from '../../../models/Point';
 import LineShape from '../../../shapes/LineShape';
 import { ShapeType } from '../../../shapes/ShapeType';
+import { lineCenter } from '../../../utils/geometry/lineCenter';
+import { lineLength } from '../../../utils/geometry/lineLength';
 import { getCoordinates } from '../viewBox/getCoordinates';
 import { ViewBox } from '../viewBox/ViewBox';
 
@@ -61,18 +63,28 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
     return (
         <>
             {tempEndPoint !== null && startPoint !== null && (
-                <LineShape
-                    id={new Date().getTime()}
-                    x={startPoint.x}
-                    y={startPoint.y}
-                    strokeWidth={strokeWidth}
-                    fill="red"
-                    shape={{
-                        type: ShapeType.LINE,
-                        x2: tempEndPoint.x,
-                        y2: tempEndPoint.y,
-                    }}
-                />
+                <>
+                    <LineShape
+                        id={new Date().getTime()}
+                        x={startPoint.x}
+                        y={startPoint.y}
+                        strokeWidth={strokeWidth}
+                        fill="red"
+                        shape={{
+                            type: ShapeType.LINE,
+                            x2: tempEndPoint.x,
+                            y2: tempEndPoint.y,
+                        }}
+                    />
+                    <text
+                        {...lineCenter(startPoint, tempEndPoint)}
+                        fontSize={1}
+                        style={{ userSelect: 'none', backgroundColor: 'white' }}
+                        textAnchor="middle"
+                    >
+                        {lineLength(startPoint, tempEndPoint)}
+                    </text>
+                </>
             )}
             <FullSizeOverlay
                 x={props.viewBox.x}
