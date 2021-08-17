@@ -21,7 +21,7 @@ Online 2D CAD Tool for precise drawings.
 -   edit global scale and units
 -   [x] select objects
 -   [x] delete objects
--   [ ] show edge length of shapes
+-   [x] show edge length of shapes
 -   [ ] show area of shapes
 -   [ ] history / redo feature
 -   [ ] user can upload **background images**

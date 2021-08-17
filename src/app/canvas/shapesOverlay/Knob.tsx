@@ -34,8 +34,8 @@ const Knob: FunctionComponent<KnobProps> = (props) => {
         window.addEventListener('mouseup', onMouseUp);
 
         return () => {
-            window.addEventListener('mousemove', onMouseMove);
-            window.addEventListener('mouseup', onMouseUp);
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
         };
         // adding onChange or onChangeFinish to depency array causes huge performance issues
         // eslint-disable-next-line react-hooks/exhaustive-deps
