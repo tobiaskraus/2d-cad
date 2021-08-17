@@ -18,17 +18,15 @@ const ModifyLineOverlay: FunctionComponent<ModifyLineOverlayProps> = (props) => 
     const [p2, setP2] = useState<Point>({ x: props.shape.x2, y: props.shape.y2 });
     const dispatch = useAppDispatch();
 
-    const onChangeFinish = () => {
+    const onChangeP1Finish = (point: Point) => onChangeFinish({ x: point.x, y: point.y });
+    const onChangeP2Finish = (point: Point) =>
+        onChangeFinish({ shape: { ...props.shape, x2: point.x, y2: point.y } });
+
+    const onChangeFinish = (data: Partial<ShapeObject<Line>>) => {
         dispatch(
             modifyShape({
                 id: props.id,
-                x: p1.x,
-                y: p1.y,
-                shape: {
-                    ...props.shape,
-                    x2: p2.x,
-                    y2: p2.y,
-                },
+                ...data,
             })
         );
     };
@@ -48,7 +46,7 @@ const ModifyLineOverlay: FunctionComponent<ModifyLineOverlayProps> = (props) => 
                 radius={props.strokeWidth * 4}
                 viewBox={props.viewBox}
                 onChange={setP1}
-                onChangeFinish={onChangeFinish}
+                onChangeFinish={onChangeP1Finish}
             />
             <Knob
                 x={p2.x}
@@ -56,7 +54,7 @@ const ModifyLineOverlay: FunctionComponent<ModifyLineOverlayProps> = (props) => 
                 radius={props.strokeWidth * 4}
                 viewBox={props.viewBox}
                 onChange={setP2}
-                onChangeFinish={onChangeFinish}
+                onChangeFinish={onChangeP2Finish}
             />
         </g>
     );

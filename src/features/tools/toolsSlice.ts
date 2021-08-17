@@ -12,7 +12,7 @@ export interface ToolsState {
 }
 
 export const initialState: ToolsState = {
-    activeTool: Tool.HAND,
+    activeTool: Tool.SELECT,
 };
 
 export const toolsSlice = createSlice({
