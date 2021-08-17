@@ -12,6 +12,7 @@ import { ShapeObject } from './ShapeObject';
 type ModifyLineOverlayProps = ShapeObject<Line> & {
     viewBox: ViewBox;
     strokeWidth: number;
+    textSize: number;
 };
 
 const ModifyLineOverlay: FunctionComponent<ModifyLineOverlayProps> = (props) => {
@@ -34,7 +35,7 @@ const ModifyLineOverlay: FunctionComponent<ModifyLineOverlayProps> = (props) => 
 
     return (
         <g>
-            <Ruler p1={{ x: p1.x, y: p1.y }} p2={{ x: p2.x, y: p2.y }} />
+            <Ruler p1={{ x: p1.x, y: p1.y }} p2={{ x: p2.x, y: p2.y }} textSize={props.textSize} />
             <line
                 x1={p1.x}
                 y1={p1.y}

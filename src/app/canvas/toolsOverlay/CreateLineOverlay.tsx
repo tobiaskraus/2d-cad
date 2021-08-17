@@ -13,6 +13,7 @@ import { ViewBox } from '../viewBox/ViewBox';
 
 interface CreateLineOverlayProps {
     viewBox: ViewBox;
+    textSize: number;
 }
 
 const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => {
@@ -68,6 +69,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                         x={startPoint.x}
                         y={startPoint.y}
                         strokeWidth={strokeWidth}
+                        textSize={props.textSize}
                         fill="red"
                         viewBox={props.viewBox}
                         shape={{
@@ -76,7 +78,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                             y2: tempEndPoint.y,
                         }}
                     />
-                    <Ruler p1={startPoint} p2={tempEndPoint} />
+                    <Ruler p1={startPoint} p2={tempEndPoint} textSize={props.textSize} />
                 </>
             )}
             <FullSizeOverlay

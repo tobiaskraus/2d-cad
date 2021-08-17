@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { config } from '../../../config';
 
 import { Tool } from '../../../features/tools/toolsSlice';
 import { useAppSelector } from '../../../hooks';
@@ -13,12 +14,13 @@ interface ToolsOverlayProps {
 
 const ToolsOverlay: FunctionComponent<ToolsOverlayProps> = (props) => {
     const activeTool = useAppSelector((state) => state.tools.activeTool);
+    const textSize = (props.viewBox.height + props.viewBox.width) * config.RELATIVE_TEXT_SIZE;
 
     switch (activeTool) {
         case Tool.HAND:
             return <HandOverlay viewBox={props.viewBox} setViewBox={props.setViewBox} />;
         case Tool.CREATE_LINE:
-            return <CreateLineOverlay viewBox={props.viewBox} />;
+            return <CreateLineOverlay viewBox={props.viewBox} textSize={textSize} />;
         default:
             return null;
     }

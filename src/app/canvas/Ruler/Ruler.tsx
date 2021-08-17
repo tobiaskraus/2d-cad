@@ -8,6 +8,7 @@ import { lineLength } from '../../../utils/geometry/lineLength';
 interface RulerProps {
     p1: Point;
     p2: Point;
+    textSize: number;
 }
 
 const Ruler: FunctionComponent<RulerProps> = (props) => {
@@ -16,12 +17,14 @@ const Ruler: FunctionComponent<RulerProps> = (props) => {
         <text
             x={x}
             y={y}
-            fontSize={1}
+            fontSize={props.textSize}
             style={{
                 userSelect: 'none',
                 backgroundColor: 'white',
                 fill: 'blue',
-                transform: `rotate(${lineAngle(props.p1, props.p2)}deg) translate(0,-0.5px)`,
+                transform: `rotate(${lineAngle(props.p1, props.p2)}deg) translate(0,-${
+                    props.textSize * 0.5
+                }px)`,
                 transformOrigin: `${x}px ${y}px`,
             }}
             textAnchor="middle"

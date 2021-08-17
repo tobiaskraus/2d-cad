@@ -22,6 +22,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
     const activeTool = useAppSelector((state) => state.tools.activeTool);
     const dispatch = useAppDispatch();
     const strokeWidth = (props.viewBox.height + props.viewBox.width) * config.RELATIVE_STROKE_WIDTH;
+    const textSize = (props.viewBox.height + props.viewBox.width) * config.RELATIVE_TEXT_SIZE;
 
     const onShapeClick = (id: number) => {
         if (activeTool === Tool.SELECT) {
@@ -53,6 +54,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
                         onClick={() => onShapeClick(obj.id)}
                         viewBox={props.viewBox}
                         strokeWidth={strokeWidth}
+                        textSize={textSize}
                         key={obj.id}
                         {...(obj as ShapeObject<Line>)}
                     />

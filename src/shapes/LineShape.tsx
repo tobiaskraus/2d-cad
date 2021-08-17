@@ -9,6 +9,7 @@ import { ShapeObject } from './ShapeObject';
 type LineShapeProps = ShapeObject<Line> & {
     onClick?: () => void;
     strokeWidth: number;
+    textSize: number;
     viewBox: ViewBox;
 };
 
@@ -19,6 +20,7 @@ const LineShape: FunctionComponent<LineShapeProps> = (props) => (
                 <Ruler
                     p1={{ x: props.x, y: props.y }}
                     p2={{ x: props.shape.x2, y: props.shape.y2 }}
+                    textSize={props.textSize}
                 />
                 <line
                     x1={props.x}
