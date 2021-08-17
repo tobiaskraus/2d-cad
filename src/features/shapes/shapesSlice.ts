@@ -53,9 +53,15 @@ export const shapesSlice = createSlice({
         deleteSelectedShape: (state) => {
             state.layers = state.layers.filter((layer) => !state.selectedIds.includes(layer.id));
         },
+
+        modifyShape: (state, action: PayloadAction<Partial<ShapeObject>>) => {
+            let shapeIndex = state.layers.findIndex((shape) => shape.id === action.payload.id);
+            if (shapeIndex === -1) return;
+            state.layers.splice(shapeIndex, 1, { ...state.layers[shapeIndex], ...action.payload });
+        },
     },
 });
 
-export const { createShape, selectShape, deleteSelectedShape } = shapesSlice.actions;
+export const { createShape, selectShape, deleteSelectedShape, modifyShape } = shapesSlice.actions;
 
 export default shapesSlice.reducer;

@@ -51,6 +51,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
                 return (
                     <LineShape
                         onClick={() => onShapeClick(obj.id)}
+                        viewBox={props.viewBox}
                         strokeWidth={strokeWidth}
                         key={obj.id}
                         {...(obj as ShapeObject<Line>)}

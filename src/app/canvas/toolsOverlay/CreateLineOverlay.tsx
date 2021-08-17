@@ -69,6 +69,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                         y={startPoint.y}
                         strokeWidth={strokeWidth}
                         fill="red"
+                        viewBox={props.viewBox}
                         shape={{
                             type: ShapeType.LINE,
                             x2: tempEndPoint.x,
