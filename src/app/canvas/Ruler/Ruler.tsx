@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from 'react';
 
+import { config } from '../../../config';
 import { Point } from '../../../models/Point';
 import { lineAngle } from '../../../utils/geometry/lineAngle';
 import { lineCenter } from '../../../utils/geometry/lineCenter';
 import { lineLength } from '../../../utils/geometry/lineLength';
+import { prettyFloat } from '../../../utils/prettyFloat';
 
 interface RulerProps {
     p1: Point;
@@ -29,7 +31,10 @@ const Ruler: FunctionComponent<RulerProps> = (props) => {
             }}
             textAnchor="middle"
         >
-            {lineLength(props.p1, props.p2)}
+            {prettyFloat(
+                lineLength(props.p1, props.p2),
+                props.textSize / config.RELATIVE_TEXT_SIZE
+            )}
         </text>
     );
 };
