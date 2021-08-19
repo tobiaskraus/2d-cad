@@ -23,7 +23,7 @@ const Grid: FunctionComponent<GridProps> = (props) => {
                     <path
                         d={`M ${gridGapSizes.small} 0 L 0 0 0 ${gridGapSizes.small}`}
                         fill="none"
-                        stroke="gray"
+                        stroke="#aaaaaa"
                         strokeWidth={strokeWidth}
                     />
                 </pattern>
@@ -41,7 +41,7 @@ const Grid: FunctionComponent<GridProps> = (props) => {
                     <path
                         d={`M ${gridGapSizes.big} 0 L 0 0 0 ${gridGapSizes.big}`}
                         fill="none"
-                        stroke="gray"
+                        stroke="#aaaaaa"
                         strokeWidth={strokeWidth * 2}
                     />
                 </pattern>

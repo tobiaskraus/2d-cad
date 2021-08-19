@@ -36,6 +36,7 @@ const LineLabels: FunctionComponent<LineLabelsProps> = (props) => {
             {xVals.map((x) => (
                 <text
                     key={x}
+                    textAnchor="middle"
                     x={x}
                     y={props.viewBox.height - props.viewBox.height * 0.01 + props.viewBox.y}
                     fontSize={fontSize}
@@ -48,7 +49,7 @@ const LineLabels: FunctionComponent<LineLabelsProps> = (props) => {
                 <text
                     key={y}
                     textAnchor="end"
-                    y={y}
+                    y={y + fontSize * 0.4}
                     x={props.viewBox.width - props.viewBox.width * 0.01 + props.viewBox.x}
                     fontSize={fontSize}
                     style={{ userSelect: 'none' }}
