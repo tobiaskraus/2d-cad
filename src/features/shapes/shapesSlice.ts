@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { config } from '../../config';
 import { Rect } from '../../shapes/Rect';
 import { ShapeObject } from '../../shapes/ShapeObject';
 import { ShapeType } from '../../shapes/ShapeType';
@@ -15,7 +16,7 @@ export const initialState: ShapesState = {
             id: 1,
             x: 20,
             y: 30,
-            fill: 'red',
+            fill: config.COLORS.softPrimary,
             shape: {
                 type: ShapeType.RECT,
                 width: 5,
@@ -26,7 +27,7 @@ export const initialState: ShapesState = {
             id: 11,
             x: 0,
             y: 50,
-            fill: 'purple',
+            fill: config.COLORS.softPrimary,
             shape: {
                 type: ShapeType.LINE,
                 x2: 60,

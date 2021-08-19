@@ -5,4 +5,8 @@ export const config = {
     RELATIVE_TEXT_SIZE: 0.01,
     SCROLL_MOVE_SPEED: 0.001,
     MOVE_STEP_FACTOR: 0.2,
+    COLORS: {
+        softPrimary: '#0783a2',
+        activePrimary: 'blue',
+    },
 };

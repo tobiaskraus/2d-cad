@@ -3,6 +3,7 @@ import React, { FunctionComponent, useState } from 'react';
 import Ruler from '../app/canvas/Ruler/Ruler';
 import Knob from '../app/canvas/shapesOverlay/Knob';
 import { ViewBox } from '../app/canvas/viewBox/ViewBox';
+import { config } from '../config';
 import { modifyShape } from '../features/shapes/shapesSlice';
 import { useAppDispatch } from '../hooks';
 import { Point } from '../models/Point';
@@ -35,7 +36,12 @@ const ModifyLineOverlay: FunctionComponent<ModifyLineOverlayProps> = (props) => 
 
     return (
         <g>
-            <Ruler p1={{ x: p1.x, y: p1.y }} p2={{ x: p2.x, y: p2.y }} textSize={props.textSize} />
+            <Ruler
+                p1={{ x: p1.x, y: p1.y }}
+                p2={{ x: p2.x, y: p2.y }}
+                textSize={props.textSize}
+                textColor={config.COLORS.activePrimary}
+            />
             <line
                 x1={p1.x}
                 y1={p1.y}

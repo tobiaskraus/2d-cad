@@ -10,6 +10,7 @@ import { prettyFloat } from '../../../utils/prettyFloat';
 interface RulerProps {
     p1: Point;
     p2: Point;
+    textColor: string;
     textSize: number;
 }
 
@@ -23,7 +24,7 @@ const Ruler: FunctionComponent<RulerProps> = (props) => {
             style={{
                 userSelect: 'none',
                 backgroundColor: 'white',
-                fill: 'blue',
+                fill: props.textColor,
                 transform: `rotate(${lineAngle(props.p1, props.p2)}deg) translate(0,-${
                     props.textSize * 0.5
                 }px)`,

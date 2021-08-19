@@ -28,7 +28,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                 id: new Date().getTime(),
                 x: start.x,
                 y: start.y,
-                fill: '#0783a2',
+                fill: config.COLORS.softPrimary,
                 shape: {
                     type: ShapeType.LINE,
                     x2: end.x,
@@ -70,7 +70,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                         y={startPoint.y}
                         strokeWidth={strokeWidth}
                         textSize={props.textSize}
-                        fill="red"
+                        fill={config.COLORS.activePrimary}
                         viewBox={props.viewBox}
                         shape={{
                             type: ShapeType.LINE,
@@ -78,7 +78,12 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
                             y2: tempEndPoint.y,
                         }}
                     />
-                    <Ruler p1={startPoint} p2={tempEndPoint} textSize={props.textSize} />
+                    <Ruler
+                        p1={startPoint}
+                        p2={tempEndPoint}
+                        textSize={props.textSize}
+                        textColor={config.COLORS.activePrimary}
+                    />
                 </>
             )}
             <FullSizeOverlay
