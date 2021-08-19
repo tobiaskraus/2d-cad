@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
+import { config } from '../../../config';
 import { findNumberSequenceInRange } from '../../../utils/findNumberSequenceInRange';
 import { ViewBox } from '../viewBox/ViewBox';
 
@@ -28,6 +29,8 @@ const LineLabels: FunctionComponent<LineLabelsProps> = (props) => {
         [props.gridGapSizes]
     );
 
+    const fontSize = (props.viewBox.width + props.viewBox.height) * config.RELATIVE_TEXT_SIZE;
+
     return (
         <g>
             {xVals.map((x) => (
@@ -35,7 +38,7 @@ const LineLabels: FunctionComponent<LineLabelsProps> = (props) => {
                     key={x}
                     x={x}
                     y={props.viewBox.height - props.viewBox.height * 0.01 + props.viewBox.y}
-                    fontSize={props.gridGapSizes.small}
+                    fontSize={fontSize}
                     style={{ userSelect: 'none' }}
                 >
                     {formatFloat(x)}
@@ -47,7 +50,7 @@ const LineLabels: FunctionComponent<LineLabelsProps> = (props) => {
                     textAnchor="end"
                     y={y}
                     x={props.viewBox.width - props.viewBox.width * 0.01 + props.viewBox.x}
-                    fontSize={props.gridGapSizes.small}
+                    fontSize={fontSize}
                     style={{ userSelect: 'none' }}
                 >
                     {formatFloat(y)}
