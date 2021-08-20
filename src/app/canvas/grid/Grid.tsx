@@ -10,7 +10,10 @@ interface GridProps {
 
 const Grid: FunctionComponent<GridProps> = (props) => {
     const strokeWidth = ((props.viewBox.width + props.viewBox.height) / 2) * 0.001;
-    const gridGapSizes = useMemo(() => getGridGapSizes(props.viewBox.width), [props.viewBox]);
+    const gridGapSizes = useMemo(
+        () => getGridGapSizes(props.viewBox.pixelsPerUnit),
+        [props.viewBox.pixelsPerUnit]
+    );
     return (
         <>
             <defs>

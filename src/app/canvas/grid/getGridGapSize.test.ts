@@ -1,7 +1,7 @@
 import { closestPowerOf10, getGridGapSizes } from './getGridGapSizes';
 
 interface GridSizeLookkup {
-    viewWidth: number;
+    pixelsPerUnit: number;
     gapSizes: {
         small: number;
         big: number;
@@ -18,40 +18,22 @@ describe('getGridSize', () => {
         expect(closestPowerOf10(0.0011)).toBe(0.001);
         expect(closestPowerOf10(0.0099)).toBe(0.001);
     });
+
     it('getGridSize()', () => {
         const gridSizeLookkups: GridSizeLookkup[] = [
-            {
-                viewWidth: 1,
-                gapSizes: {
-                    small: 0.01,
-                    big: 0.1,
-                },
-            },
-            {
-                viewWidth: 20,
-                gapSizes: {
-                    small: 0.1,
-                    big: 1,
-                },
-            },
-            {
-                viewWidth: 21,
-                gapSizes: {
-                    small: 0.5,
-                    big: 1,
-                },
-            },
-            {
-                viewWidth: 100,
-                gapSizes: {
-                    small: 1,
-                    big: 10,
-                },
-            },
+            { pixelsPerUnit: 0.99, gapSizes: { small: 20, big: 100 } },
+            { pixelsPerUnit: 1.1, gapSizes: { small: 10, big: 50 } },
+            { pixelsPerUnit: 2.99, gapSizes: { small: 10, big: 50 } },
+            { pixelsPerUnit: 3.01, gapSizes: { small: 5, big: 10 } },
+            { pixelsPerUnit: 5.99, gapSizes: { small: 5, big: 10 } },
+            { pixelsPerUnit: 6.01, gapSizes: { small: 2, big: 10 } },
+            { pixelsPerUnit: 9.99, gapSizes: { small: 2, big: 10 } },
+            { pixelsPerUnit: 10.01, gapSizes: { small: 1, big: 5 } },
+            { pixelsPerUnit: 100.01, gapSizes: { small: 0.1, big: 0.5 } },
         ];
-        gridSizeLookkups.forEach(({ viewWidth, gapSizes }) => {
-            expect(getGridGapSizes(viewWidth).big).toBeCloseTo(gapSizes.big);
-            expect(getGridGapSizes(viewWidth).small).toBeCloseTo(gapSizes.small);
+        gridSizeLookkups.forEach(({ pixelsPerUnit, gapSizes }) => {
+            expect(getGridGapSizes(pixelsPerUnit).big).toBeCloseTo(gapSizes.big);
+            expect(getGridGapSizes(pixelsPerUnit).small).toBeCloseTo(gapSizes.small);
         });
     });
 });

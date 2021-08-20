@@ -1,28 +1,21 @@
-export function getGridGapSizes(width: number): { big: number; small: number } {
-    // gapSize, which would fit 10 - 100 gaps in whole width
-    let gapPowerOf10 = closestPowerOf10(width) * 0.1;
-
-    if (width / gapPowerOf10 > 80) {
+export function getGridGapSizes(pixelsPerUnit: number): { big: number; small: number } {
+    // smallest width (power of ten) which is still visible (1 - real 10px)
+    let smallestUnitPowerOf10 = closestPowerOf10(10 / pixelsPerUnit);
+    if (smallestUnitPowerOf10 * pixelsPerUnit < 3) {
         return {
-            big: gapPowerOf10 * 10,
-            small: gapPowerOf10 * 2,
+            small: smallestUnitPowerOf10 * 10,
+            big: smallestUnitPowerOf10 * 50,
         };
     }
-    if (width / gapPowerOf10 > 40) {
+    if (smallestUnitPowerOf10 * pixelsPerUnit < 6) {
         return {
-            big: gapPowerOf10 * 5,
-            small: gapPowerOf10,
-        };
-    }
-    if (width / gapPowerOf10 > 20) {
-        return {
-            big: gapPowerOf10,
-            small: gapPowerOf10 * 0.5,
+            small: smallestUnitPowerOf10 * 5,
+            big: smallestUnitPowerOf10 * 10,
         };
     }
     return {
-        big: gapPowerOf10,
-        small: gapPowerOf10 * 0.1,
+        small: smallestUnitPowerOf10 * 2,
+        big: smallestUnitPowerOf10 * 10,
     };
 }
 
