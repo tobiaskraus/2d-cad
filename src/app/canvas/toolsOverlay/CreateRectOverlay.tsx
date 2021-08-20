@@ -5,34 +5,32 @@ import { config } from '../../../config';
 import { createShape } from '../../../features/shapes/shapesSlice';
 import { useAppDispatch } from '../../../hooks';
 import { Point } from '../../../models/Point';
-import LineShape from '../../../shapes/LineShape';
+import RectShape from '../../../shapes/RectShape';
 import { ShapeType } from '../../../shapes/ShapeType';
-import Ruler from '../Ruler/Ruler';
 import { getCoordinates } from '../viewBox/getCoordinates';
 import { ViewBox } from '../viewBox/ViewBox';
 
-interface CreateLineOverlayProps {
+interface CreateRectOverlayProps {
     viewBox: ViewBox;
-    textSize: number;
 }
 
-const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => {
+const CreateRectOverlay: FunctionComponent<CreateRectOverlayProps> = (props) => {
     const [startPoint, setStartPoint] = useState<Point | null>(null);
     const [tempEndPoint, setTempEndPoint] = useState<Point | null>(null);
     const dispatch = useAppDispatch();
     const strokeWidth = (props.viewBox.height + props.viewBox.width) * config.RELATIVE_STROKE_WIDTH;
 
-    const createLine = (start: Point, end: Point) => {
+    const createRect = (start: Point, end: Point) => {
         dispatch(
             createShape({
                 id: new Date().getTime(),
-                x: start.x,
-                y: start.y,
+                x: Math.min(start.x, end.x),
+                y: Math.min(start.y, end.y),
                 fill: config.COLORS.softPrimary,
                 shape: {
-                    type: ShapeType.LINE,
-                    x2: end.x,
-                    y2: end.y,
+                    type: ShapeType.RECT,
+                    width: Math.abs(end.x - start.x),
+                    height: Math.abs(end.y - start.y),
                 },
             })
         );
@@ -54,7 +52,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
             throw Error('no startPoint');
         }
         const coordinates = getCoordinates(e.clientX, e.clientY, props.viewBox);
-        createLine(startPoint, coordinates);
+        createRect(startPoint, coordinates);
 
         setStartPoint(null);
         setTempEndPoint(null);
@@ -64,25 +62,19 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
         <>
             {tempEndPoint !== null && startPoint !== null && (
                 <>
-                    <LineShape
+                    <RectShape
                         id={new Date().getTime()}
-                        x={startPoint.x}
-                        y={startPoint.y}
+                        x={Math.min(startPoint.x, tempEndPoint.x)}
+                        y={Math.min(startPoint.y, tempEndPoint.y)}
                         strokeWidth={strokeWidth}
-                        textSize={props.textSize}
+                        // textSize={props.textSize}
                         fill={config.COLORS.activePrimary}
-                        viewBox={props.viewBox}
+                        // viewBox={props.viewBox}
                         shape={{
-                            type: ShapeType.LINE,
-                            x2: tempEndPoint.x,
-                            y2: tempEndPoint.y,
+                            type: ShapeType.RECT,
+                            width: Math.abs(tempEndPoint.x - startPoint.x),
+                            height: Math.abs(tempEndPoint.y - startPoint.y),
                         }}
-                    />
-                    <Ruler
-                        p1={startPoint}
-                        p2={tempEndPoint}
-                        textSize={props.textSize}
-                        textColor={config.COLORS.activePrimary}
                     />
                 </>
             )}
@@ -99,7 +91,7 @@ const CreateLineOverlay: FunctionComponent<CreateLineOverlayProps> = (props) => 
     );
 };
 
-export default CreateLineOverlay;
+export default CreateRectOverlay;
 
 const FullSizeOverlay = styled.rect`
     cursor: crosshair;

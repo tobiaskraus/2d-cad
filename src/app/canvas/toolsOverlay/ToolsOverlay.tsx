@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { config } from '../../../config';
 
+import { config } from '../../../config';
 import { Tool } from '../../../features/tools/toolsSlice';
 import { useAppSelector } from '../../../hooks';
 import { ViewBox } from '../viewBox/ViewBox';
 import CreateLineOverlay from './CreateLineOverlay';
+import CreateRectOverlay from './CreateRectOverlay';
 import HandOverlay from './HandOverlay';
 
 interface ToolsOverlayProps {
@@ -21,6 +22,8 @@ const ToolsOverlay: FunctionComponent<ToolsOverlayProps> = (props) => {
             return <HandOverlay viewBox={props.viewBox} setViewBox={props.setViewBox} />;
         case Tool.CREATE_LINE:
             return <CreateLineOverlay viewBox={props.viewBox} textSize={textSize} />;
+        case Tool.CREATE_RECT:
+            return <CreateRectOverlay viewBox={props.viewBox} />;
         default:
             return null;
     }
