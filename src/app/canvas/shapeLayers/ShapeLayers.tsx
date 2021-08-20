@@ -45,6 +45,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
                         onClick={() => onShapeClick(obj.id)}
                         strokeWidth={strokeWidth}
                         key={obj.id}
+                        textSize={textSize}
                         {...(obj as ShapeObject<Rect>)}
                     />
                 );

@@ -1,12 +1,20 @@
 import React, { FunctionComponent } from 'react';
+import Ruler from '../app/canvas/Ruler/Ruler';
+import { config } from '../config';
+import { Point } from '../models/Point';
 
 import { Rect } from './Rect';
 import { ShapeObject } from './ShapeObject';
 
-type RectShapeProps = ShapeObject<Rect> & { onClick?: () => void; strokeWidth: number };
+type RectShapeProps = ShapeObject<Rect> & {
+    onClick?: () => void;
+    strokeWidth: number;
+    textSize: number;
+};
 
 const RectShape: FunctionComponent<RectShapeProps> = (props) => (
     <>
+        <EdgeLabels {...props} />
         <rect
             onClick={props.onClick}
             x={props.x}
@@ -29,3 +37,21 @@ const RectShape: FunctionComponent<RectShapeProps> = (props) => (
 );
 
 export default RectShape;
+
+const EdgeLabels: FunctionComponent<RectShapeProps> = ({ x, y, shape, textSize }) => {
+    const pTopLeft: Point = { x, y };
+    const pTopRight: Point = { x: x + shape.width, y };
+    const pBottomRight: Point = { x: x + shape.width, y: y + shape.height };
+
+    const rulerStyles = {
+        textSize,
+        textColor: config.COLORS.softPrimary,
+    };
+
+    return (
+        <>
+            <Ruler p1={pTopRight} p2={pBottomRight} {...rulerStyles} />
+            <Ruler p1={pTopLeft} p2={pTopRight} {...rulerStyles} />
+        </>
+    );
+};

@@ -12,6 +12,7 @@ import { ViewBox } from '../viewBox/ViewBox';
 
 interface CreateRectOverlayProps {
     viewBox: ViewBox;
+    textSize: number;
 }
 
 const CreateRectOverlay: FunctionComponent<CreateRectOverlayProps> = (props) => {
@@ -67,7 +68,7 @@ const CreateRectOverlay: FunctionComponent<CreateRectOverlayProps> = (props) => 
                         x={Math.min(startPoint.x, tempEndPoint.x)}
                         y={Math.min(startPoint.y, tempEndPoint.y)}
                         strokeWidth={strokeWidth}
-                        // textSize={props.textSize}
+                        textSize={props.textSize}
                         fill={config.COLORS.activePrimary}
                         // viewBox={props.viewBox}
                         shape={{

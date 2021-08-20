@@ -23,7 +23,7 @@ const ToolsOverlay: FunctionComponent<ToolsOverlayProps> = (props) => {
         case Tool.CREATE_LINE:
             return <CreateLineOverlay viewBox={props.viewBox} textSize={textSize} />;
         case Tool.CREATE_RECT:
-            return <CreateRectOverlay viewBox={props.viewBox} />;
+            return <CreateRectOverlay viewBox={props.viewBox} textSize={textSize} />;
         default:
             return null;
     }
