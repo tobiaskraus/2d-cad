@@ -37,7 +37,6 @@ const ViewBoxControl: FunctionComponent<ViewBoxControlProps> = (props) => {
     useEffect(() => {
         const onWheel = (e: WheelEvent) => {
             if (e.altKey) {
-                e.preventDefault();
                 const centerPoint = getCoordinates(e.clientX, e.clientY, props.viewBox);
                 onChange((vb) => zoom(vb, e.deltaY, centerPoint));
             } else {
