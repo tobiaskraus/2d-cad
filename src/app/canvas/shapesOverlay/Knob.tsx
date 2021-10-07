@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useEffect, useRef } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Point } from '../../../models/Point';
-import { getCoordinates } from '../viewBox/getCoordinates';
+import { useDrag } from '../../../utils/useDrag';
 import { ViewBox } from '../viewBox/ViewBox';
 
 interface KnobProps {
@@ -13,35 +13,8 @@ interface KnobProps {
 }
 
 const Knob: FunctionComponent<KnobProps> = (props) => {
-    const grabbing = useRef(false);
     const { viewBox, onChange, onChangeFinish } = props;
-
-    useEffect(() => {
-        const onMouseMove = (e: MouseEvent) => {
-            if (!grabbing.current) {
-                return;
-            }
-            onChange(getCoordinates(e.clientX, e.clientY, viewBox));
-        };
-        const onMouseUp = (e: MouseEvent) => {
-            if (grabbing.current) {
-                grabbing.current = false;
-                onChangeFinish(getCoordinates(e.clientX, e.clientY, viewBox));
-            }
-        };
-
-        window.addEventListener('mousemove', onMouseMove);
-        window.addEventListener('mouseup', onMouseUp);
-
-        return () => {
-            window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('mouseup', onMouseUp);
-        };
-        // adding onChange or onChangeFinish to depency array causes huge performance issues
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [viewBox]);
-
-    const onMouseDown = () => (grabbing.current = true);
+    const { onMouseDown } = useDrag(viewBox, onChange, onChangeFinish);
 
     return <circle {...{ onMouseDown }} r={props.radius} cx={props.x} cy={props.y} fill="black" />;
 };
