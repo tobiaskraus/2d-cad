@@ -18,10 +18,22 @@ Online 2D CAD Tool for precise drawings.
     -   [ ] Polygon
     -   [ ] Text
 
--   edit global scale and units
--   [x] select objects
--   [x] delete objects
+-   [ ] edit global scale and units
+-   [x] select shapes
+-   [x] delete shapes
 -   [x] show edge length of shapes
+-   move shapes (drag / grab)
+    -   [x] Rectangle
+    -   [ ] Line
+    -   [ ] Circle
+    -   [ ] Polygon
+    -   [ ] Text
+-   modify shapes (drag / grab)
+    -   [ ] Rectangle
+    -   [x] Line
+    -   [ ] Circle
+    -   [ ] Polygon
+    -   [ ] Text
 -   [ ] show area of shapes
 -   [ ] history / redo feature
 -   [ ] user can upload **background images**

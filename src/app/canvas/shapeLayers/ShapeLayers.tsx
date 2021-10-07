@@ -43,6 +43,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
                 return (
                     <RectShape
                         onClick={() => onShapeClick(obj.id)}
+                        viewBox={props.viewBox}
                         strokeWidth={strokeWidth}
                         key={obj.id}
                         textSize={textSize}

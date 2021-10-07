@@ -70,7 +70,7 @@ const CreateRectOverlay: FunctionComponent<CreateRectOverlayProps> = (props) => 
                         strokeWidth={strokeWidth}
                         textSize={props.textSize}
                         fill={config.COLORS.activePrimary}
-                        // viewBox={props.viewBox}
+                        viewBox={props.viewBox}
                         shape={{
                             type: ShapeType.RECT,
                             width: Math.abs(tempEndPoint.x - startPoint.x),
