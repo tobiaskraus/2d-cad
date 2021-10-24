@@ -21,6 +21,7 @@ const RectShape: FunctionComponent<RectShapeProps> = (props) => (
             <>
                 <EdgeLabels {...props} />
                 <rect
+                    className="rect-shape"
                     onClick={props.onClick}
                     x={props.x}
                     y={props.y}

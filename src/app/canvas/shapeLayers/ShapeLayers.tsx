@@ -73,7 +73,7 @@ const ShapeLayers: FunctionComponent<ShapeLayersProps> = (props) => {
                 height={props.viewBox.height}
                 width={props.viewBox.width}
             />
-            {layers.map((obj) => shape(obj))}
+            <g id="shape-layers">{layers.map((obj) => shape(obj))}</g>
         </>
     );
 };

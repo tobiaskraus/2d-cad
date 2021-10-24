@@ -25,6 +25,7 @@ const LineShape: FunctionComponent<LineShapeProps> = (props) => (
                     textColor={config.COLORS.softPrimary}
                 />
                 <line
+                    className="line-shape"
                     x1={props.x}
                     y1={props.y}
                     x2={props.shape.x2}
@@ -33,6 +34,7 @@ const LineShape: FunctionComponent<LineShapeProps> = (props) => (
                 />
                 {/* Click wrapper */}
                 <line
+                    className="line-shape-handler"
                     stroke="transparent"
                     onClick={props.onClick}
                     strokeWidth={props.strokeWidth * 10}
